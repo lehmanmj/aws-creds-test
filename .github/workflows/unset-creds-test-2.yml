@@ -29,6 +29,12 @@ jobs:
           echo $AWS_SESSION_TOKEN
           echo $AWS_ACCESS_KEY_ID
 
+      - name: re-use first credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test
+
       # I expect this to wipe the `AWS_` variables, but instead it errors out
       - name: Unset terraform aws credentials
         uses: aws-actions/configure-aws-credentials@v4
