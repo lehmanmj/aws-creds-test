@@ -15,5 +15,5 @@ jobs:
         with:
           aws-region: eu-west-1
           role-to-assume: arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test
-          role-session-name: dependabot[bot]
+          role-session-name: dependabot
           audience: sts.amazonaws.com
