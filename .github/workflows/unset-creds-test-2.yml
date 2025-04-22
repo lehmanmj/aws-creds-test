@@ -18,7 +18,9 @@ jobs:
 
       # I expect this to be able to use the `AWS_` variables, which it does correctly
       - name: Terraform init
-        run: echo $AWS_SESSION_TOKEN
+        run: |
+          echo $AWS_SESSION_TOKEN
+          echo $AWS_REGION
 
       # I expect this to be able to use the `AWS_` variables, which it does correctly
       - name: Terraform plan
@@ -31,7 +33,7 @@ jobs:
       - name: Unset terraform aws credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-region: us-east-1
+          aws-region: us-east-2
           unset-current-credentials: true
           role-to-assume: arn:aws:iam::891612571239:role/Chime-Read-CAWSC-Test
 
