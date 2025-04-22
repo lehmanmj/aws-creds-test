@@ -34,7 +34,6 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-west-2
-          unset-current-credentials: true
           role-to-assume: arn:aws:iam::891612571239:role/Chime-Read-CAWSC-Test
 
       # This last step and any subsequent step should no longer have any access to AWS credentials
