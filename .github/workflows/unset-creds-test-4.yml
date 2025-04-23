@@ -40,3 +40,14 @@ jobs:
       # This last step and any subsequent step should no longer have any access to AWS credentials
       - name: Some random thing that might be insecure and even if its secure, it doesn't need AWS credentials
         run: echo $AWS_REGION
+
+  cawscagain:
+    runs-on: ubuntu-latest
+    permissions:
+        id-token: write
+        contents: read
+    steps:
+      - name: try to access env variable
+        run: |
+            echo $AWS_REGION
+            echo ${{ steps.hi.outputs.aws-session-token }}
