@@ -1,0 +1,49 @@
+name: unset-creds-test-6
+on:
+  workflow_dispatch:
+
+jobs:
+  cawsc: 
+    env:
+        INPUT_AWS-REGION: us-east-1
+        INPUT_ROLE-TO-ASSUME: arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test
+        INPUT_OUTPUT-CREDENTIALS: true
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      # I expect this to populate a bunch of `AWS_` variables, which it does correctly.
+      - name: Configure AWS Credentials
+        id: firstCreds
+        uses: aws-actions/configure-aws-credentials@output-expiration
+
+      - name: um whatever i guess
+        id: hi
+        run: echo "DOES_THIS_WORK=hell yeah it does" >> "$GITHUB_OUTPUT"
+
+      # I expect this to be able to use the `AWS_` variables, which it does correctly
+      - name: Terraform init
+        env:
+          FIRST_EXP: ${{ steps.firstCreds.outputs.aws-expiration }}
+          DOES_IT_WORK: ${{ steps.hi.outputs.DOES_THIS_WORK }}
+        run: |
+          echo "First set of credentials expire at ${{ steps.firstcreds.outputs.aws-expiration }}"
+          echo "Does this syntax work? $DOES_IT_WORK"
+
+      - name: wait a minute
+        run: sleep 5s
+
+      # I expect this to wipe the `AWS_` variables, but instead it errors out
+      - name: Unset terraform aws credentials
+        id: creds2
+        uses: aws-actions/configure-aws-credentials@output-expiration
+
+      # This last step and any subsequent step should no longer have any access to AWS credentials
+      - name: Some random thing that might be insecure and even if its secure, it doesn't need AWS credentials
+        env:
+          FIRST_EXP: ${{ steps.firstCreds.outputs.aws-expiration }}
+          SECOND_EXP: ${{ steps.creds2.outputs.aws-expiration }}
+        run: |
+          echo "First set of credentials expire at $FIRST_EXP"
+          echo "Second set of credentials expire at $SECOND_EXP"
