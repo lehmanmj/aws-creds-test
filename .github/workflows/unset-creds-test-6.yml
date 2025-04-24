@@ -16,7 +16,7 @@ jobs:
       # I expect this to populate a bunch of `AWS_` variables, which it does correctly.
       - name: Configure AWS Credentials
         id: firstCreds
-        uses: aws-actions/configure-aws-credentials@output-expiration
+        uses: aws-actions/configure-aws-credentials@main
 
       - name: um whatever i guess
         id: hi
@@ -37,7 +37,7 @@ jobs:
       # I expect this to wipe the `AWS_` variables, but instead it errors out
       - name: Unset terraform aws credentials
         id: creds2
-        uses: aws-actions/configure-aws-credentials@output-expiration
+        uses: aws-actions/configure-aws-credentials@main
 
       # This last step and any subsequent step should no longer have any access to AWS credentials
       - name: Some random thing that might be insecure and even if its secure, it doesn't need AWS credentials
