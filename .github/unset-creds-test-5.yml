@@ -1,0 +1,35 @@
+name: unset-creds-test-5
+on:
+  workflow_dispatch:
+
+jobs:
+  cawsc:  
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      # I expect this to populate a bunch of `AWS_` variables, which it does correctly.
+      - name: Configure AWS Credentials
+        id: firstCreds
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test
+
+      # I expect this to be able to use the `AWS_` variables, which it does correctly
+      - name: Terraform init
+        run: echo ${{ steps.firstCreds.outputs.aws-expiration }}
+
+      # I expect this to wipe the `AWS_` variables, but instead it errors out
+      - name: Unset terraform aws credentials
+        id: creds2
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          unset-current-credentials: true
+          role-to-assume: arn:aws:iam::891612571239:role/Chime-Read-CAWSC-Test
+
+      # This last step and any subsequent step should no longer have any access to AWS credentials
+      - name: Some random thing that might be insecure and even if its secure, it doesn't need AWS credentials
+        run: echo $AWS_REGION
