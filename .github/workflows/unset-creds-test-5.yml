@@ -28,11 +28,11 @@ jobs:
           FIRST_EXP: ${{ steps.firstCreds.outputs.aws-expiration }}
           DOES_IT_WORK: ${{ steps.hi.outputs.DOES_THIS_WORK }}
         run: |
-          echo "First set of credentials expire at $FIRST_EXP"
+          echo "First set of credentials expire at ${{ steps.firstcreds.outputs.aws-expiration }}"
           echo "Does this syntax work? $DOES_IT_WORK"
 
       - name: wait a minute
-        run: sleep 90s
+        run: sleep 5s
 
       # I expect this to wipe the `AWS_` variables, but instead it errors out
       - name: Unset terraform aws credentials
