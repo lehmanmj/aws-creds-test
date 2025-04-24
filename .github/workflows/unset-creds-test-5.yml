@@ -20,7 +20,7 @@ jobs:
 
       # I expect this to be able to use the `AWS_` variables, which it does correctly
       - name: Terraform init
-        run: echo ${{ steps.firstCreds.outputs.aws-expiration }}
+        run: echo "${{ steps.firstCreds.outputs.aws-expiration }}""
 
       # I expect this to wipe the `AWS_` variables, but instead it errors out
       - name: Unset terraform aws credentials
@@ -34,6 +34,6 @@ jobs:
       # This last step and any subsequent step should no longer have any access to AWS credentials
       - name: Some random thing that might be insecure and even if its secure, it doesn't need AWS credentials
         run: |
-          echo ${{ steps.firstCreds.outputs.aws-expiration }}
-          echo ${{ steps.creds2.outputs.aws-expiration }}
+          echo "${{ steps.firstCreds.outputs.aws-expiration }}"
+          echo "${{ steps.creds2.outputs.aws-expiration }}"
           echo hi
