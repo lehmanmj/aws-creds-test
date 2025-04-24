@@ -31,6 +31,8 @@ jobs:
           echo "First set of credentials expire at $FIRST_EXP"
           echo "Does this syntax work? $DOES_IT_WORK"
 
+      - name: wait a minute
+        run: sleep 90s
 
       # I expect this to wipe the `AWS_` variables, but instead it errors out
       - name: Unset terraform aws credentials
