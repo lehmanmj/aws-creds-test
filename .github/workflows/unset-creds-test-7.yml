@@ -4,10 +4,6 @@ on:
 
 jobs:
   cawsc: 
-    env:
-      INPUT_AWS-REGION: 'us-east-1'
-      INPUT_ROLE-TO-ASSUME: 'arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test'
-      INPUT_OUTPUT-CREDENTIALS: true
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -17,4 +13,9 @@ jobs:
       - name: Configure AWS Credentials
         id: firstCreds
         uses: aws-actions/configure-aws-credentials@main
+        env:
+          INPUT_AWS-REGION: 'us-east-1'
+          INPUT_ROLE-TO-ASSUME: 'arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test'
+          INPUT_OUTPUT-CREDENTIALS: true
+
        
