@@ -1,8 +1,8 @@
 name: unset-creds-test-6
 env:
-  aws-region: 'us-east-1'
-  role-to-assume: 'arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test'
-  output-credentials: true
+  AWS_REGION: 'us-east-1'
+  ROLE_TO_ASSUME: 'arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test'
+  OUTPUT_CREDENTIALS: true
 on:
   workflow_dispatch:
 
