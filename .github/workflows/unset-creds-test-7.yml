@@ -1,6 +1,7 @@
 name: unset-creds-test-7
 env: 
   INPUT_AUDIENCE: whoever
+  INPUT_AWS-REGION: us-east-1
 on:
   workflow_dispatch:
 
