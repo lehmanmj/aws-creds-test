@@ -1,4 +1,7 @@
 name: unset-creds-test-7
+env:
+  AWS_REGION: us-east-1
+  ROLE_TO_ASSUME: arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test
 on:
   workflow_dispatch:
 
@@ -11,10 +14,7 @@ jobs:
     steps:
       - name: Configure AWS Credentials
         id: firstCreds
-        uses: aws-actions/configure-aws-credentials@test-ghaction-input
-        with: 
-          role-to-assume: arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test
-          aws-region: ${{ vars.AWS_REGION }}
+        uses: aws-actions/configure-aws-credentials@environment-variables
         
         
 
