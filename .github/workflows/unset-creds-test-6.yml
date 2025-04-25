@@ -37,7 +37,7 @@ jobs:
       # I expect this to wipe the `AWS_` variables, but instead it errors out
       - name: Unset terraform aws credentials
         id: creds2
-        uses: aws-actions/configure-aws-credentials@main
+        uses: aws-actions/configure-aws-credentials@environment-variables
 
       # This last step and any subsequent step should no longer have any access to AWS credentials
       - name: Some random thing that might be insecure and even if its secure, it doesn't need AWS credentials
