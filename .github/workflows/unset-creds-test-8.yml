@@ -10,9 +10,16 @@ jobs:
       contents: read
     steps:
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@f157a6574f0ccfe5fd8879947413fc0811009186
         with: 
           aws-region: us-east-1
           role-to-assume: arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test
           role-session-name: MySessionName
-            
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@f157a6574f0ccfe5fd8879947413fc0811009186
+        with: 
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test
+          role-session-name: MySessionName
+  
