@@ -1,7 +1,4 @@
 name: unset-creds-test-8
-env:
-  AWS_REGION: 'us-east-1'
-  ROLE_TO_ASSUME: 'arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test'
 on:
   workflow_dispatch:
 
@@ -17,5 +14,5 @@ jobs:
         with: 
           aws-region: us-east-1
           role-to-assume: arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test
-          role-session-name: My Session Name
+          role-session-name: MySessionName
             
