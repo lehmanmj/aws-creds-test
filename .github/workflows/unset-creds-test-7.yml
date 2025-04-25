@@ -12,9 +12,7 @@ jobs:
       # I expect this to populate a bunch of `AWS_` variables, which it does correctly.
       - name: set env
         run: |
-          export INPUT_AWS-REGION="us-east-1"
-          export INPUT_ROLE-TO-ASSUME="arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test"
-          export HI_HELLO_HI_HELLO="banana"
+          env "INPUT_AWS-REGION=us-east-1" "INPUT_ROLE-TO-ASSUME=arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test" bash
       - name: Configure AWS Credentials
         id: firstCreds
         uses: aws-actions/configure-aws-credentials@test-ghaction-input
