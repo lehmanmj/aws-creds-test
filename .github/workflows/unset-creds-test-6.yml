@@ -16,11 +16,8 @@ jobs:
       # I expect this to populate a bunch of `AWS_` variables, which it does correctly.
       - name: Configure AWS Credentials
         id: firstCreds
-        uses: aws-actions/configure-aws-credentials@main
-        with: 
-            aws-region: 'us-east-1'
-            role-to-assume: 'arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test'
-            output-credentials: true
+        uses: aws-actions/configure-aws-credentials@environment-variables
+
       - name: um whatever i guess
         id: hi
         run: echo "DOES_THIS_WORK=hell yeah it does" >> "$GITHUB_OUTPUT"
@@ -41,10 +38,6 @@ jobs:
       - name: Unset terraform aws credentials
         id: creds2
         uses: aws-actions/configure-aws-credentials@main
-        with:
-            aws-region: 'us-east-1'
-            role-to-assume: 'arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test'
-            output-credentials: true
 
       # This last step and any subsequent step should no longer have any access to AWS credentials
       - name: Some random thing that might be insecure and even if its secure, it doesn't need AWS credentials
