@@ -1,7 +1,4 @@
 name: unset-creds-test-7
-env: 
-  INPUT_AUDIENCE: whoever
-  INPUT_AWS-REGION: us-east-1
 on:
   workflow_dispatch:
 
@@ -12,15 +9,12 @@ jobs:
       id-token: write
       contents: read
     steps:
-      # I expect this to populate a bunch of `AWS_` variables, which it does correctly.
-      - name: toms cool step
-        uses: actions/github-script@v7
-        with:
-          script: |
-            process.env['INPUT_AWS-REGION'] = 'us-west-4';
       - name: Configure AWS Credentials
         id: firstCreds
         uses: aws-actions/configure-aws-credentials@test-ghaction-input
+        with: 
+          role-to-assume: arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test
+          aws-region: ${{ vars.AWS_REGION }}
         
         
 
