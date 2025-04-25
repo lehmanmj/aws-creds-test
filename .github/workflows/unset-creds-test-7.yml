@@ -13,7 +13,10 @@ jobs:
       - name: Configure AWS Credentials
         id: firstCreds
         uses: aws-actions/configure-aws-credentials@test-ghaction-input
-        env:
+        with:
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test
+          output-credentials: true
           INPUT_AWS-REGION: 'us-east-1'
           INPUT_ROLE-TO-ASSUME: 'arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test'
           INPUT_OUTPUT-CREDENTIALS: true
