@@ -1,0 +1,20 @@
+name: unset-creds-test-6
+env:
+  aws-region: 'us-east-1'
+  role-to-assume: 'arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test'
+  output-credentials: true
+on:
+  workflow_dispatch:
+
+jobs:
+  cawsc: 
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      # I expect this to populate a bunch of `AWS_` variables, which it does correctly.
+      - name: Configure AWS Credentials
+        id: firstCreds
+        uses: aws-actions/configure-aws-credentials@main
+       
