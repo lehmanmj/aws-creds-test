@@ -1,4 +1,6 @@
 name: unset-creds-test-7
+env: 
+  audience: asdfjkl
 on:
   workflow_dispatch:
 
@@ -15,6 +17,7 @@ jobs:
         with:
           aws-region: us-east-1
           role-to-assume: arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test
+          audience: sts.amazonaws.com
         
         
 
