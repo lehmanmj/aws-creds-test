@@ -17,6 +17,8 @@ jobs:
       - name: Configure AWS Credentials
         id: firstCreds
         uses: aws-actions/configure-aws-credentials@main
+        with:
+            aws-region: us-east-1
 
       - name: um whatever i guess
         id: hi
