@@ -13,6 +13,11 @@ jobs:
       contents: read
     steps:
       # I expect this to populate a bunch of `AWS_` variables, which it does correctly.
+      - name: toms cool step
+        uses: actions/github-script@v7
+        with:
+          script: |
+            process.env['INPUT_AWS-REGION'] = 'us-west-4';
       - name: Configure AWS Credentials
         id: firstCreds
         uses: aws-actions/configure-aws-credentials@test-ghaction-input
