@@ -12,7 +12,7 @@ jobs:
       - name: Configure AWS - Region 1
         uses: aws-actions/configure-aws-credentials@v4.2.0
         with:
-          role-to-assume: arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test
+          role-to-assume: arn:aws:iam::891612571239:role/Chime-Read-CAWSC-Test
           aws-region: eu-west-2
 
       - name: Check Region 1
@@ -22,7 +22,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4.2.0
         with:
           role-to-assume: arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test
-          aws-region: ap-southeast-1
+          aws-region: us-west-2
 
       - name: Check Region 2
         run: |
