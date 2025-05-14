@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Configure AWS - Region 1
-        uses: aws-actions/configure-aws-credentials@v4.2.0
+        uses: hozzer/configure-aws-credentials
         with:
           role-to-assume: arn:aws:iam::891612571239:role/Chime-Read-CAWSC-Test
           aws-region: eu-west-2
@@ -19,7 +19,7 @@ jobs:
         run: echo "AWS_REGION=$AWS_REGION"
 
       - name: Configure AWS - Region 2
-        uses: aws-actions/configure-aws-credentials@v4.2.0
+        uses: hozzer/configure-aws-credentials
         with:
           role-to-assume: arn:aws:iam::891612571239:role/S3-Read-CAWSC-Test
           aws-region: us-west-2
