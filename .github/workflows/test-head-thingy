@@ -1,3 +1,4 @@
+name: head-test-thing
 on:
   push:
     branches: [ master ]
