@@ -9,30 +9,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: try first region
-        id: creds1
-        uses: aws-actions/configure-aws-credentials@v4.2.1
-        with: 
-          role-to-assume: arn:aws:iam::891612571239:role/githubActionTest-Role-5YBrxygEBfRs
-          aws-region: us-east-1
-
-      - name: print stuff i guess
-        run: | 
-          echo "AWS_REGION=$AWS_REGION"
-          echo "session token: $AWS_SESSION_TOKEN"
-          echo "access key id: $AWS_ACCESS_KEY_ID"
-          echo "secret access key: $AWS_SECRET_ACCESS_KEY"
+      
     
       - name: unset the stuff
         run: |
-          echo "AWS_REGION=" >> $GITHUB_ENV
-          echo "AWS_ACCESS_KEY_ID=" >> $GITHUB_ENV
-          echo "AWS_SECRET_ACCESS_KEY=" >> $GITHUB_ENV
-          echo "AWS_SESSION_TOKEN=" >> $GITHUB_ENV
+          echo "AWS_REGIONa=hi" >> $GITHUB_ENV
       
       - name: see if it worked
         run: |
-          echo "AWS_REGION=$AWS_REGION"
-          echo "session token: $AWS_SESSION_TOKEN"
-          echo "access key id: $AWS_ACCESS_KEY_ID"
-          echo "secret access key: $AWS_SECRET_ACCESS_KEY"
+          echo "AWS_REGION=$AWS_REGIONa"
