@@ -20,3 +20,5 @@ jobs:
         run: | 
           echo "AWS_REGION=$AWS_REGION"
           echo "session token: $AWS_SESSION_TOKEN"
+          echo "access key id: $AWS_ACCESS_KEY_ID"
+          echo "secret access key: $AWS_SECRET_ACCESS_KEY"
