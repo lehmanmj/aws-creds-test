@@ -22,3 +22,17 @@ jobs:
           echo "session token: $AWS_SESSION_TOKEN"
           echo "access key id: $AWS_ACCESS_KEY_ID"
           echo "secret access key: $AWS_SECRET_ACCESS_KEY"
+    
+      - name: unset the stuff
+        run: |
+          echo "AWS_REGION=" >> $GITHUB_ENV
+          echo "AWS_ACCESS_KEY_ID=" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=" >> $GITHUB_ENV
+          echo "AWS_SESSION_TOKEN=" >> $GITHUB_ENV
+      
+      - name: see if it worked
+        run: |
+          echo "AWS_REGION=$AWS_REGION"
+          echo "session token: $AWS_SESSION_TOKEN"
+          echo "access key id: $AWS_ACCESS_KEY_ID"
+          echo "secret access key: $AWS_SECRET_ACCESS_KEY"
