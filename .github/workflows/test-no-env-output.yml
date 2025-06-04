@@ -15,6 +15,7 @@ jobs:
         with: 
           role-to-assume: arn:aws:iam::891612571239:role/githubActionTest-Role-5YBrxygEBfRs
           aws-region: us-east-1
+          output-env-credentials: true
 
       - name: print stuff i guess
         run: | 
