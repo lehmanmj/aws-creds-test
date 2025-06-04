@@ -1,0 +1,22 @@
+name: test no env outputs
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: try first region
+        id: creds1
+        uses: aws-actions/configure-aws-credentials@disable-env-output
+        with: 
+          role-to-assume: arn:aws:iam::891612571239:role/githubActionTest-Role-5YBrxygEBfRs
+          aws-region: us-east-1
+          output-env-credentials: false
+
+      - name: print stuff i guess
+        run: | 
+          echo "AWS_REGION=$AWS_REGION"
