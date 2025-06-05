@@ -15,6 +15,21 @@ jobs:
         with: 
           role-to-assume: arn:aws:iam::891612571239:role/githubActionTest-Role-5YBrxygEBfRs
           aws-region: us-east-1
+          output-credentials: true
+          output-env-credentials: false
 
+      - name: print stuff i guess
+        run: | 
+          echo "AWS_REGION=$AWS_REGION"
+          echo "AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION"
+          echo "AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN"
+
+      - name: try print more stuff
+        env: 
+          FIRST_EXP: ${{ steps.creds1.outputs.aws-expiration }}
+          SESSION_TOKEN: ${{ steps.creds1.outputs.aws-session-token }}
+        run: |
+          echo "Expiration: $FIRST_EXP"
+          echo "session token: $SESSION_TOKEN"
       
 
