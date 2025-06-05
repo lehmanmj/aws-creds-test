@@ -27,5 +27,8 @@ jobs:
       - name: try print more stuff
         env: 
           FIRST_EXP: ${{ steps.creds1.outputs.aws-expiration }}
+          SESSION_TOKEN: ${{ steps.creds1.outputs.aws-session-token }}
         run: |
           echo "Expiration: $FIRST_EXP"
+          echo "session token: $SESSION_TOKEN"
+
