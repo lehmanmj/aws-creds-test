@@ -17,6 +17,7 @@ jobs:
           aws-region: us-east-1
           output-credentials: true
           output-env-credentials: false
+          disable-retry: true
 
       - name: print stuff i guess
         run: | 
