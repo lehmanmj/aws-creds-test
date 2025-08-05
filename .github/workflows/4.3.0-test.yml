@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: try first region
         id: creds1
-        uses: aws-actions/configure-aws-credentials@59b4418
+        uses: aws-actions/configure-aws-credentials@59b441846ad109fa4a1549b73ef4e149c4bfb53b
         with: 
           role-to-assume: arn:aws:iam::891612571239:role/githubActionTest-Role-5YBrxygEBfRs
           aws-region: us-east-1
