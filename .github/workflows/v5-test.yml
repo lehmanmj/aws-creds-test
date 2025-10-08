@@ -1,0 +1,17 @@
+on:
+    workflow_dispatch:
+
+jobs:
+    do-the-thing:
+        name: test out v5 w secrets
+        permissions:
+            id-token: write
+        runs-on: ubuntu-latest
+        steps:
+          - name: configure AWS Creds
+            uses: aws-actions/configure-aws-credentials@v5
+            with:
+                aws-region: us-east-1
+                role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+                role-duration-seconds: 900
+                role-session-name: SecretsManagerFetch
