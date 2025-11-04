@@ -13,6 +13,7 @@ jobs:
         with:
             aws-region: us-east-1
             role-to-assume: arn:aws:iam::884348119369:role/first-role-to-test
+            role-session-name: MySessionName
             retry-max-attempts: 6
       - name: Get Caller Identity
         run: |
@@ -22,6 +23,7 @@ jobs:
         with:
             aws-region: us-east-2
             role-to-assume: arn:aws:iam::884348119369:role/second-role-to-test
+            role-session-name: MySessionName
             role-chaining: true
             retry-max-attempts: 6
       - name: get caller identity
