@@ -1,4 +1,4 @@
-name: oidc role chain
+name: AAAA oidc role chain
 on: 
     workflow_dispatch:
 
