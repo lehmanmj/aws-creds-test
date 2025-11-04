@@ -26,7 +26,6 @@ jobs:
             role-session-name: MySessionName
             role-chaining: true
             retry-max-attempts: 6
-            role-skip-session-tagging: true
       - name: get caller identity
         run: |
           aws sts get-caller-identity
