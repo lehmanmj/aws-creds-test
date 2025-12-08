@@ -31,4 +31,4 @@ jobs:
             run: |
                 echo "ASSUME_SPOKE_ACCOUNT=${{ steps.assume-spoke.outputs.aws-account-id }}"
                 aws sts get-caller-identity
-                echo "ASSUME_HUB_ACCOUNT=${{ steps.assume-spoke.outputs.aws-account-id }}"
+                echo "ASSUME_HUB_ACCOUNT=${{ steps.assume-hub.outputs.aws-account-id }}"
