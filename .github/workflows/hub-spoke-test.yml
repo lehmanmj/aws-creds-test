@@ -24,7 +24,6 @@ jobs:
                 aws-region: ca-central-1
                 role-chaining: true
                 role-skip-session-tagging: true
-                mask-aws-account-id: false
 
           - name: Debug build spoke identity
             run: |
