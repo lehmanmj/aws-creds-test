@@ -44,6 +44,14 @@ jobs:
                 role-skip-session-tagging: true
                 mask-aws-account-id: false
 
+          - name: second OIDC call
+            id: second-oidc
+            uses: aws-actions/configure-aws-credentials@v5
+            with:
+                role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+                aws-region: ca-central-1
+                role-skip-session-tagging: true
+
           - name: Debug build spoke identity
             run: |
                 aws sts get-caller-identity
@@ -55,3 +63,5 @@ jobs:
                 echo "ASSUME_SPOKE_ARN=${{ steps.assume-spoke.outputs.authenticated-arn }}"
                 echo "ASSUME_L2_SPOKE_ACCOUNT=${{ steps.assume-L2-spoke.outputs.aws-account-id }}"
                 echo "ASSUME_L2_SPOKE_ARN=${{ steps.assume-L2-spoke.outputs.authenticated-arn }}"
+                echo "ASSUME_OIDC_ACCOUNT2=${{ steps.second-oidc-oidc.outputs.aws-account-id }}"
+                echo "ASSUME_OIDC_ARN2=${{ steps.second-oidc-oidc.outputs.authenticated-arn }}"
