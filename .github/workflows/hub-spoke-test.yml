@@ -63,5 +63,5 @@ jobs:
                 echo "ASSUME_SPOKE_ARN=${{ steps.assume-spoke.outputs.authenticated-arn }}"
                 echo "ASSUME_L2_SPOKE_ACCOUNT=${{ steps.assume-L2-spoke.outputs.aws-account-id }}"
                 echo "ASSUME_L2_SPOKE_ARN=${{ steps.assume-L2-spoke.outputs.authenticated-arn }}"
-                echo "ASSUME_OIDC_ACCOUNT2=${{ steps.second-oidc-oidc.outputs.aws-account-id }}"
-                echo "ASSUME_OIDC_ARN2=${{ steps.second-oidc-oidc.outputs.authenticated-arn }}"
+                echo "ASSUME_OIDC_ACCOUNT2=${{ steps.second-oidc.outputs.aws-account-id }}"
+                echo "ASSUME_OIDC_ARN2=${{ steps.second-oidc.outputs.authenticated-arn }}"
