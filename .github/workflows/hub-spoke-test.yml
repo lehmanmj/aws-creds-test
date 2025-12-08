@@ -17,9 +17,6 @@ jobs:
                 role-skip-session-tagging: true
                 output-credentials: true
 
-          - name: sleepy
-            run: sleep 30s
-
           - name: Assume Spoke Role
             id: assume-spoke
             uses: aws-actions/configure-aws-credentials@v5
@@ -32,10 +29,10 @@ jobs:
                 output-credentials: true
 
           - name: login again see what happens
-            id: assume-spoke-2
+            id: assume-L2-spoke
             uses: aws-actions/configure-aws-credentials@v5
             with:
-                role-to-assume: ${{ vars.IAM_ROLE_SPOKE_DIFF_ACCOUNT }} 
+                role-to-assume: ${{ vars.IAM_ROLE_SECOND_LEVEL_SPOKE_DIFF_ACCOUNT }} 
                 aws-region: ca-central-1
                 role-chaining: true
                 role-skip-session-tagging: true
@@ -49,5 +46,5 @@ jobs:
                 echo "ASSUME_HUB_ARN=${{ steps.assume-hub.outputs.authenticated-arn }}"
                 echo "ASSUME_SPOKE_ACCOUNT=${{ steps.assume-spoke.outputs.aws-account-id }}"
                 echo "ASSUME_SPOKE_ARN=${{ steps.assume-spoke.outputs.authenticated-arn }}"
-                echo "ASSUME_SPOKE2_ACCOUNT=${{ steps.assume-spoke-2.outputs.aws-account-id }}"
-                echo "ASSUME_SPOKE2_ARN=${{ steps.assume-spoke-2.outputs.authenticated-arn }}"
+                echo "ASSUME_L2_SPOKE_ACCOUNT=${{ steps.assume-L2-spoke.outputs.aws-account-id }}"
+                echo "ASSUME_L2_SPOKE_ARN=${{ steps.assume-L2-spoke.outputs.authenticated-arn }}"
