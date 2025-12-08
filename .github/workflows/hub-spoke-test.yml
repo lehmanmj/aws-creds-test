@@ -3,7 +3,7 @@ on:
 
 jobs:
     do-the-thing:
-        name: test out v5 w secrets
+        name: test out role chaining account number
         permissions:
             id-token: write
         runs-on: ubuntu-latest
@@ -20,7 +20,7 @@ jobs:
             id: assume-spoke
             uses: aws-actions/configure-aws-credentials@v5
             with:
-                role-to-assume: ${{ vars.IAM_ROLE_SPOKE_SAME_ACCOUNT }} 
+                role-to-assume: ${{ vars.IAM_ROLE_SPOKE_DIFF_ACCOUNT }} 
                 aws-region: ca-central-1
                 role-chaining: true
                 role-skip-session-tagging: true
