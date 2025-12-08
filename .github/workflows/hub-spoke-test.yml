@@ -8,6 +8,14 @@ jobs:
             id-token: write
         runs-on: ubuntu-latest
         steps:
+          - name: first OIDC call
+            id: assume-oidc
+            uses: aws-actions/configure-aws-credentials@v5
+            with:
+                role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+                aws-region: ca-central-1
+                role-skip-session-tagging: true
+            
           - name: Assume Hub Role
             id: assume-hub
             uses: aws-actions/configure-aws-credentials@v5
@@ -15,7 +23,6 @@ jobs:
                 role-to-assume: ${{ vars.IAM_ROLE_HUB }}
                 aws-region: ca-central-1
                 role-skip-session-tagging: true
-                output-credentials: true
 
           - name: Assume Spoke Role
             id: assume-spoke
@@ -26,7 +33,6 @@ jobs:
                 role-chaining: true
                 role-skip-session-tagging: true
                 mask-aws-account-id: false
-                output-credentials: true
 
           - name: login again see what happens
             id: assume-L2-spoke
@@ -37,11 +43,12 @@ jobs:
                 role-chaining: true
                 role-skip-session-tagging: true
                 mask-aws-account-id: false
-                output-credentials: true
 
           - name: Debug build spoke identity
             run: |
                 aws sts get-caller-identity
+                echo "ASSUME_OIDC_ACCOUNT=${{ steps.assume-oidc.outputs.aws-account-id }}"
+                echo "ASSUME_OIDC_ARN=${{ steps.assume-oidc.outputs.authenticated-arn }}"
                 echo "ASSUME_HUB_ACCOUNT=${{ steps.assume-hub.outputs.aws-account-id }}"
                 echo "ASSUME_HUB_ARN=${{ steps.assume-hub.outputs.authenticated-arn }}"
                 echo "ASSUME_SPOKE_ACCOUNT=${{ steps.assume-spoke.outputs.aws-account-id }}"
