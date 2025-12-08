@@ -31,6 +31,17 @@ jobs:
                 mask-aws-account-id: false
                 output-credentials: true
 
+          - name: login again see what happens
+            id: assume-spoke-2
+            uses: aws-actions/configure-aws-credentials@v5
+            with:
+                role-to-assume: ${{ vars.IAM_ROLE_SPOKE_DIFF_ACCOUNT }} 
+                aws-region: ca-central-1
+                role-chaining: true
+                role-skip-session-tagging: true
+                mask-aws-account-id: false
+                output-credentials: true
+
           - name: Debug build spoke identity
             run: |
                 aws sts get-caller-identity
@@ -38,3 +49,5 @@ jobs:
                 echo "ASSUME_HUB_ARN=${{ steps.assume-hub.outputs.authenticated-arn }}"
                 echo "ASSUME_SPOKE_ACCOUNT=${{ steps.assume-spoke.outputs.aws-account-id }}"
                 echo "ASSUME_SPOKE_ARN=${{ steps.assume-spoke.outputs.authenticated-arn }}"
+                echo "ASSUME_SPOKE2_ACCOUNT=${{ steps.assume-spoke-2.outputs.aws-account-id }}"
+                echo "ASSUME_SPOKE2_ARN=${{ steps.assume-spoke-2.outputs.authenticated-arn }}"
