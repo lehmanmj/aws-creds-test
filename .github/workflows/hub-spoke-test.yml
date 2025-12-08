@@ -15,6 +15,7 @@ jobs:
                 role-to-assume: ${{ vars.IAM_ROLE_HUB }}
                 aws-region: ca-central-1
                 role-skip-session-tagging: true
+                output-credentials: true
 
           - name: Assume Spoke Role
             id: assume-spoke
