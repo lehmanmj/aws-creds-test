@@ -1,0 +1,32 @@
+on:
+    workflow_dispatch:
+
+jobs:
+    do-the-thing:
+        name: test out v5 w secrets
+        permissions:
+            id-token: write
+        runs-on: ubuntu-latest
+        steps:
+          - name: Assume Hub Role
+            id: assume-hub
+            uses: aws-actions/configure-aws-credentials@v5
+            with:
+                role-to-assume: ${{ vars.IAM_ROLE_HUB }}
+                aws-region: ca-central-1
+                role-skip-session-tagging: true
+
+          - name: Assume Spoke Role
+            id: assume-spoke
+            uses: aws-actions/configure-aws-credentials@v5
+            with:
+                role-to-assume: ${{ vars.IAM_ROLE_SPOKE_SAME_ACCOUNT }} 
+                aws-region: ca-central-1
+                role-chaining: true
+                role-skip-session-tagging: true
+                mask-aws-account-id: false
+
+          - name: Debug build spoke identity
+            run: |
+                echo "ASSUME_SPOKE_ACCOUNT=${{ steps.assume-spoke.outputs.aws-account-id }}"
+                aws sts get-caller-identity
