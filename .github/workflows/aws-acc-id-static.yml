@@ -8,13 +8,6 @@ jobs:
             id-token: write
         runs-on: ubuntu-latest
         steps:
-          - name: OIDC call
-            id: assume-oidc
-            uses: aws-actions/configure-aws-credentials@v5
-            with:
-                role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-                aws-region: ca-central-1
-                role-skip-session-tagging: true
             
           - name: first static
             id: static-1
@@ -49,8 +42,6 @@ jobs:
           - name: Debug build spoke identity
             run: |
                 aws sts get-caller-identity
-                echo "ASSUME_OIDC_ACCOUNT=${{ steps.assume-oidc.outputs.aws-account-id }}"
-                echo "ASSUME_OIDC_ARN=${{ steps.assume-oidc.outputs.authenticated-arn }}"
                 echo "STATIC_1_ACCOUNT=${{ steps.static-1.outputs.aws-account-id }}"
                 echo "STATIC_1_ARN=${{ steps.static-1.outputs.authenticated-arn }}"
                 echo "STATIC_2_ACCOUNT=${{ steps.static-2.outputs.aws-account-id }}"
