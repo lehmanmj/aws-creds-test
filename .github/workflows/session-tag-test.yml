@@ -17,5 +17,12 @@ jobs:
                 aws-region: ca-central-1
                 retry-max-attempts: 6
 
+          - name: role chain!
+            uses: aws-actions/configure-aws-credentials@v5
+            with:
+                role-to-assume: arn:aws:iam::884348119369:role/spoke-session-tag
+                aws-region: ca-central-1
+                retry-max-attempts: 6
+
           - name: see whos logged in
             run: aws sts get-caller-identity
