@@ -19,6 +19,3 @@ jobs:
 
           - name: see whos logged in
             run: aws sts get-caller-identity
-
-          - name: see session tags
-            run: aws sts get-session-tag
