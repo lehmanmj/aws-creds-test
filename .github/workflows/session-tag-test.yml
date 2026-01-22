@@ -1,3 +1,4 @@
+name: session tagging
 on:
     workflow_dispatch:
 
