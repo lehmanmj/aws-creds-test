@@ -16,3 +16,4 @@ jobs:
                 role-duration-seconds: 900
                 role-session-name: SecretsManagerFetch
                 retry-max-attempts: 6
+                transitive-tag-keys: Action
