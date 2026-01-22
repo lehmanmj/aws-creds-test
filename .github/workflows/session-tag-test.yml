@@ -16,7 +16,7 @@ jobs:
                 role-to-assume: arn:aws:iam::884348119369:role/static-role-1
                 aws-access-key-id: STATIC_1_AK_ID
                 aws-secret-access-key: STATIC_1_SECRET_AK
-                aws-region: us-west-2
+                aws-region: ca-central-1
 
           - name: Debug build spoke identity
             run: |
