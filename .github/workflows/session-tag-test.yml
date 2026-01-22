@@ -5,8 +5,6 @@ on:
 jobs:
     do-the-thing:
         name: test session tags
-        permissions:
-            id-token: write
         runs-on: ubuntu-latest
         steps:
           - name: first static
