@@ -16,7 +16,7 @@ jobs:
                 aws-secret-access-key: ${{ secrets.STATIC_1_SECRET_AK }}
                 aws-region: us-west-1
                 retry-max-attempts: 6
-                transitive-tag-keys: 
+                transitive-tag-keys: |
                     Repository
                     Workflow
                     Action
@@ -29,7 +29,6 @@ jobs:
                 aws-region: us-west-1
                 retry-max-attempts: 6
                 role-chaining: true
-                role-skip-session-tagging: true
 
           - name: see whos logged in
             run: aws sts get-caller-identity
