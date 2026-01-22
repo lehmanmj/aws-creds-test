@@ -17,5 +17,4 @@ jobs:
                 aws-region: ca-central-1
 
           - name: Debug build spoke identity
-            run: |
-                aws sts get-caller-identity
+            run: aws sts get-caller-identity
