@@ -9,9 +9,10 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - name: configure AWS Creds
-            uses: aws-actions/configure-aws-credentials@v5
+            uses: aws-actions/configure-aws-credentials@maintux-nn-feat/add-transitive-tag-keys
             with:
                 aws-region: us-east-1
                 role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
                 role-duration-seconds: 900
                 role-session-name: SecretsManagerFetch
+                retry-max-attempts: 6
