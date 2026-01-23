@@ -29,11 +29,6 @@ jobs:
                 aws-region: us-west-1
                 retry-max-attempts: 6
                 role-chaining: true
-                transitive-tag-keys: |
-                    Repository
-                    Workflow
-                    Action
-                    Actor
 
           - name: see whos logged in
             run: aws sts get-caller-identity
