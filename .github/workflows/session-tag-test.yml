@@ -21,6 +21,7 @@ jobs:
                     Workflow
                     Action
                     Actor
+                    RandomValue
 
           - name: role chain!
             uses: aws-actions/configure-aws-credentials@maintux-nn-feat/add-transitive-tag-keys
