@@ -11,9 +11,12 @@ jobs:
           - name: configure AWS Creds
             uses: aws-actions/configure-aws-credentials@maintux-nn-feat/add-transitive-tag-keys
             with:
-                aws-region: us-east-1
+                aws-region: us-east-2
                 role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
                 role-duration-seconds: 900
                 role-session-name: SecretsManagerFetch
                 retry-max-attempts: 6
-                transitive-tag-keys: Action
+                transitive-tag-keys: |
+                    Repository
+                    GitHub
+                    Action
