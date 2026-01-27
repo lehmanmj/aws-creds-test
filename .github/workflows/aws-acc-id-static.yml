@@ -11,7 +11,7 @@ jobs:
         steps:
           - name: OIDC call
             id: assume-oidc
-            uses: aws-actions/configure-aws-credentials@v5
+            uses: aws-actions/configure-aws-credentials@v4
             with:
                 role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
                 aws-region: ca-central-1
@@ -20,7 +20,7 @@ jobs:
         
           - name: OIDC spoke 1
             id: oidc-spoke-lv-1
-            uses: aws-actions/configure-aws-credentials@v5
+            uses: aws-actions/configure-aws-credentials@v4
             with:
                 role-to-assume: arn:aws:iam::884348119369:role/new-Spoke-Test-outputs
                 aws-region: ca-central-1
@@ -30,7 +30,7 @@ jobs:
 
           - name: OIDC spoke 2
             id: oidc-spoke-lv-2
-            uses: aws-actions/configure-aws-credentials@v5
+            uses: aws-actions/configure-aws-credentials@v4
             with:
                 role-to-assume: arn:aws:iam::884348119369:role/oidc-spoke-level-2
                 aws-region: ca-central-1
@@ -40,7 +40,7 @@ jobs:
             
           - name: first static
             id: static-1
-            uses: aws-actions/configure-aws-credentials@v5
+            uses: aws-actions/configure-aws-credentials@v4
             with:
                 role-to-assume: arn:aws:iam::884348119369:role/static-role-1
                 aws-access-key-id: ${{ secrets.STATIC_1_AK_ID }}
@@ -51,7 +51,7 @@ jobs:
           
           - name: second static
             id: static-2
-            uses: aws-actions/configure-aws-credentials@v5
+            uses: aws-actions/configure-aws-credentials@v4
             with:
                 role-to-assume: arn:aws:iam::884348119369:role/static-role-2
                 aws-access-key-id: ${{ secrets.STATIC_2_AK_ID }}
@@ -62,7 +62,7 @@ jobs:
 
           - name: static-spoke
             id: static-2-spoke
-            uses: aws-actions/configure-aws-credentials@v5
+            uses: aws-actions/configure-aws-credentials@v4
             with:
                 role-to-assume: arn:aws:iam::884348119369:role/static-role-2-spoke
                 aws-region: ca-central-1
