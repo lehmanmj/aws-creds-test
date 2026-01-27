@@ -1,3 +1,4 @@
+name: 111Static role chain testing
 on:
     workflow_dispatch:
 
@@ -15,6 +16,7 @@ jobs:
                 role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
                 aws-region: ca-central-1
                 role-skip-session-tagging: true
+                mask-aws-account-id: false
         
           - name: OIDC spoke 1
             id: oidc-spoke-lv-1
@@ -24,6 +26,7 @@ jobs:
                 aws-region: ca-central-1
                 role-skip-session-tagging: true
                 role-chaining: true
+                mask-aws-account-id: false
 
           - name: OIDC spoke 2
             id: oidc-spoke-lv-2
@@ -33,6 +36,7 @@ jobs:
                 aws-region: ca-central-1
                 role-skip-session-tagging: true
                 role-chaining: true
+                mask-aws-account-id: false
             
           - name: first static
             id: static-1
@@ -43,6 +47,7 @@ jobs:
                 aws-secret-access-key: ${{ secrets.STATIC_1_SECRET_AK }}
                 aws-region: ca-central-1
                 role-skip-session-tagging: true
+                mask-aws-account-id: false
           
           - name: second static
             id: static-2
@@ -53,6 +58,7 @@ jobs:
                 aws-secret-access-key: ${{ secrets.STATIC_2_SECRET_AK }}
                 aws-region: ca-central-1
                 role-skip-session-tagging: true
+                mask-aws-account-id: false
 
           - name: static-spoke
             id: static-2-spoke
