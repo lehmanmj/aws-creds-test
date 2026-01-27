@@ -15,6 +15,24 @@ jobs:
                 role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
                 aws-region: ca-central-1
                 role-skip-session-tagging: true
+        
+          - name: OIDC spoke 1
+            id: oidc-spoke-lv-1
+            uses: aws-actions/configure-aws-credentials@v5
+            with:
+                role-to-assume: arn:aws:iam::884348119369:role/new-Spoke-Test-outputs
+                aws-region: ca-central-1
+                role-skip-session-tagging: true
+                role-chaining: true
+
+          - name: OIDC spoke 2
+            id: oidc-spoke-lv-2
+            uses: aws-actions/configure-aws-credentials@v5
+            with:
+                role-to-assume: arn:aws:iam::884348119369:role/oidc-spoke-level-2
+                aws-region: ca-central-1
+                role-skip-session-tagging: true
+                role-chaining: true
             
           - name: first static
             id: static-1
@@ -51,6 +69,10 @@ jobs:
                 aws sts get-caller-identity
                 echo "ASSUME_OIDC_ACCOUNT=${{ steps.assume-oidc.outputs.aws-account-id }}"
                 echo "ASSUME_OIDC_ARN=${{ steps.assume-oidc.outputs.authenticated-arn }}"
+                echo "OIDC_SPOKE_1_ACCOUNT=${{ steps.oidc-spoke-lv-1.outputs.aws-account-id }}"
+                echo "OIDC_SPOKE_1_ARN=${{ steps.oidc-spoke-lv-1.outputs.authenticated-arn }}"
+                echo "OIDC_SPOKE_2_ACCOUNT=${{ steps.oidc-spoke-lv-2.outputs.aws-account-id }}"
+                echo "OIDC_SPOKE_2_ARN=${{ steps.oidc-spoke-lv-2.outputs.authenticated-arn }}"
                 echo "STATIC_1_ACCOUNT=${{ steps.static-1.outputs.aws-account-id }}"
                 echo "STATIC_1_ARN=${{ steps.static-1.outputs.authenticated-arn }}"
                 echo "STATIC_2_ACCOUNT=${{ steps.static-2.outputs.aws-account-id }}"
