@@ -75,7 +75,6 @@ jobs:
                 aws sts get-caller-identity
                 echo "ASSUME_OIDC_ACCOUNT=${{ steps.assume-oidc.outputs.aws-account-id }}"
                 echo "ASSUME_OIDC_ARN=${{ steps.assume-oidc.outputs.authenticated-arn }}"
-                echo "ASSUME_OIDC_test_output=${{ steps.assume-oidc.outputs.test-output-1 }}"
                 echo "OIDC_SPOKE_1_ACCOUNT=${{ steps.oidc-spoke-lv-1.outputs.aws-account-id }}"
                 echo "OIDC_SPOKE_1_ARN=${{ steps.oidc-spoke-lv-1.outputs.authenticated-arn }}"
                 echo "OIDC_SPOKE_2_ACCOUNT=${{ steps.oidc-spoke-lv-2.outputs.aws-account-id }}"
