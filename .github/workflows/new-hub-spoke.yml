@@ -12,7 +12,7 @@ jobs:
         steps:
           - name: first OIDC call
             id: assume-oidc
-            uses: aws-actions/configure-aws-credentials@v5
+            uses: aws-actions/configure-aws-credentials@role-chain-patch
             with:
                 role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
                 aws-region: ca-central-1
@@ -21,7 +21,7 @@ jobs:
             
           - name: Assume Hub Role
             id: assume-hub
-            uses: aws-actions/configure-aws-credentials@v5
+            uses: aws-actions/configure-aws-credentials@role-chain-patch
             with:
                 role-to-assume: ${{ vars.IAM_ROLE_HUB }}
                 aws-region: ca-central-1
@@ -30,7 +30,7 @@ jobs:
 
           - name: Assume Spoke Role
             id: assume-spoke
-            uses: aws-actions/configure-aws-credentials@v5
+            uses: aws-actions/configure-aws-credentials@role-chain-patch
             with:
                 role-to-assume: ${{ vars.IAM_ROLE_SPOKE_DIFF_ACCOUNT }} 
                 aws-region: ca-central-1
@@ -40,7 +40,7 @@ jobs:
 
           - name: login again see what happens
             id: assume-L2-spoke
-            uses: aws-actions/configure-aws-credentials@v5
+            uses: aws-actions/configure-aws-credentials@role-chain-patch
             with:
                 role-to-assume: ${{ vars.IAM_ROLE_SECOND_LEVEL_SPOKE_DIFF_ACCOUNT }} 
                 aws-region: ca-central-1
@@ -50,7 +50,7 @@ jobs:
 
           - name: second OIDC call
             id: second-oidc
-            uses: aws-actions/configure-aws-credentials@v5
+            uses: aws-actions/configure-aws-credentials@role-chain-patch
             with:
                 role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
                 aws-region: ca-central-1
