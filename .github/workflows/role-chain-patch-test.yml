@@ -1,0 +1,69 @@
+name: role chain acc-id Patch test
+on:
+    workflow_dispatch:
+
+jobs:
+    do-the-thing:
+        name: test out role chaining account number
+        permissions:
+            id-token: write
+        runs-on: ubuntu-latest
+        steps:
+          - name: First Role
+            id: role-1
+            uses: aws-actions/configure-aws-credentials@main
+            with:
+                role-to-assume: arn:aws:iam::884348119369:role/role-chain-test-1
+                aws-region: ca-central-1
+        
+          - name: Second Role
+            id: role-2
+            uses: aws-actions/configure-aws-credentials@main
+            with:
+                role-to-assume: arn:aws:iam::399546983971:role/role-chain-test-2
+                aws-region: ca-central-1
+                role-chaining: true
+                mask-aws-account-id: false
+
+          - name: Third Role
+            id: role-3
+            uses: aws-actions/configure-aws-credentials@main
+            with:
+                role-to-assume: arn:aws:iam::145006476196:role/role-chain-test-3
+                aws-region: ca-central-1
+                role-chaining: true
+                mask-aws-account-id: false
+                        
+          - name: Fourth Role
+            id: role-4
+            uses: aws-actions/configure-aws-credentials@main
+            with:
+                role-to-assume: arn:aws:iam::399546983971:role/role-chain-4
+                aws-region: ca-central-1
+                role-skip-session-tagging: true
+                role-chaining: true
+                mask-aws-account-id: false
+        
+          - name: Fifth Role
+            id: role-5
+            uses: aws-actions/configure-aws-credentials@main
+            with:
+                role-to-assume: arn:aws:iam::884348119369:role/role-chain-test-5
+                aws-region: ca-central-1
+                role-skip-session-tagging: true
+                role-chaining: true
+                mask-aws-account-id: false
+
+          - name: Debug build spoke identity
+            run: |
+                aws sts get-caller-identity
+                echo "role-1_ACCOUNT=${{ steps.role-1.outputs.aws-account-id }}"
+                echo "role-1_ARN=${{ steps.role-1.outputs.authenticated-arn }}"
+                echo "role-2_ACCOUNT=${{ steps.role-2.outputs.aws-account-id }}"
+                echo "role-2_ARN=${{ steps.role-2.outputs.authenticated-arn }}"
+                echo "role-3_ACCOUNT=${{ steps.role-3.outputs.aws-account-id }}"
+                echo "role-3_ARN=${{ steps.role-3.outputs.authenticated-arn }}"
+                echo "role-4_ACCOUNT=${{ steps.role-4.outputs.aws-account-id }}"
+                echo "role-4_ARN=${{ steps.role-4.outputs.authenticated-arn }}"
+                echo "role-5_ACCOUNT=${{ steps.role-5.outputs.aws-account-id }}"
+                echo "role-5_ARN=${{ steps.role-5.outputs.authenticated-arn }}"
