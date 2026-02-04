@@ -11,14 +11,14 @@ jobs:
         steps:
           - name: First Role
             id: role-1
-            uses: aws-actions/configure-aws-credentials@role-chain-acc-id-patch
+            uses: aws-actions/configure-aws-credentials@main
             with:
                 role-to-assume: arn:aws:iam::884348119369:role/role-chain-test-1
                 aws-region: ca-central-1
         
           - name: Second Role
             id: role-2
-            uses: aws-actions/configure-aws-credentials@role-chain-acc-id-patch
+            uses: aws-actions/configure-aws-credentials@main
             with:
                 role-to-assume: arn:aws:iam::399546983971:role/role-chain-test-2
                 aws-region: ca-central-1
@@ -27,7 +27,7 @@ jobs:
 
           - name: Third Role
             id: role-3
-            uses: aws-actions/configure-aws-credentials@role-chain-acc-id-patch
+            uses: aws-actions/configure-aws-credentials@main
             with:
                 role-to-assume: arn:aws:iam::145006476196:role/role-chain-test-3
                 aws-region: ca-central-1
@@ -36,7 +36,7 @@ jobs:
                         
           - name: Fourth Role
             id: role-4
-            uses: aws-actions/configure-aws-credentials@role-chain-acc-id-patch
+            uses: aws-actions/configure-aws-credentials@main
             with:
                 role-to-assume: arn:aws:iam::399546983971:role/role-chain-4
                 aws-region: ca-central-1
@@ -46,7 +46,7 @@ jobs:
         
           - name: Fifth Role
             id: role-5
-            uses: aws-actions/configure-aws-credentials@role-chain-acc-id-patch
+            uses: aws-actions/configure-aws-credentials@main
             with:
                 role-to-assume: arn:aws:iam::884348119369:role/role-chain-test-5
                 aws-region: ca-central-1
