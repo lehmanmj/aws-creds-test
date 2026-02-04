@@ -1,0 +1,36 @@
+name: session tagging v6.0.0
+on:
+    workflow_dispatch:
+
+jobs:
+    do-the-thing:
+        name: test session tags
+        runs-on: ubuntu-latest
+        steps:
+          - name: assume role
+            id: hello-hello-hello3241
+            uses: aws-actions/configure-aws-credentials@v6.0.0
+            with:
+                role-to-assume: arn:aws:iam::884348119369:role/static-role-1
+                aws-access-key-id: ${{ secrets.STATIC_1_AK_ID }}
+                aws-secret-access-key: ${{ secrets.STATIC_1_SECRET_AK }}
+                aws-region: us-east-2
+                retry-max-attempts: 6
+                transitive-tag-keys: |
+                    Repository
+                    Workflow
+                    Action
+                    Actor
+                    RandomValue
+
+          - name: role chain!
+            uses: aws-actions/configure-aws-credentials@v6.0.0
+            with:
+                role-to-assume: arn:aws:iam::884348119369:role/spoke-session-tag
+                aws-region: us-east-2
+                retry-max-attempts: 6
+                role-chaining: true
+                role-skip-session-tagging: true
+
+          - name: see whos logged in
+            run: aws sts get-caller-identity
