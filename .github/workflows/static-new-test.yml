@@ -1,0 +1,29 @@
+name: 111aaa static new test
+on: workflow_dispatch
+
+jobs:
+    static_assumeRole:
+        if: ${{ github.event_name == 'workflow_dispatch' || (github.event.pull_request.user.login == 'aws-sdk-osds' && github.repository == 'aws-actions/configure-aws-credentials') }}
+        strategy: 
+            fail-fast: false
+            matrix:
+                os: [windows-latest, ubuntu-latest, macos-latest]
+        runs-on: ${{ matrix.os }}
+        name: Static IAM creds test
+        steps:
+            #UNCOMMENT THIS ONE
+        #- name: checkout
+            #uses: actions/checkout@v5
+            #with:
+                #fetch-depth: 0
+                #persist-credentials: false
+          - name: assume creator Role
+            #uses: ./
+            uses: aws-actions/configure-aws-credentials@v6 #REPLACE THIS
+            with:
+                aws-region: us-west-2
+                role-to-assume: ${{ secrets.STATIC_USER_CREATION_ROLE }}
+
+          - name: Get Caller Identity
+            run: aws iam create-user --user-name static-creds-test-00000000
+            
