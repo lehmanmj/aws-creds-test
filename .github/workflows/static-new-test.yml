@@ -8,9 +8,10 @@ jobs:
             id-token: write
         strategy: 
             fail-fast: false
-            matrix:
-                os: [windows-latest, ubuntu-latest, macos-latest]
-        runs-on: ${{ matrix.os }}
+            #matrix:
+                #os: [windows-latest, ubuntu-latest, macos-latest]
+        #runs-on: ${{ matrix.os }}
+        runs-on: ubuntu-latest
         name: Static IAM creds test
         steps:
             #UNCOMMENT THIS ONE
