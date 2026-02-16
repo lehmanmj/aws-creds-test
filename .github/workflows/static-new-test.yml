@@ -4,6 +4,8 @@ on: workflow_dispatch
 jobs:
     static_assumeRole:
         if: ${{ github.event_name == 'workflow_dispatch' || (github.event.pull_request.user.login == 'aws-sdk-osds' && github.repository == 'aws-actions/configure-aws-credentials') }}
+        permissions:
+            id-token: write
         strategy: 
             fail-fast: false
             matrix:
@@ -26,4 +28,3 @@ jobs:
 
           - name: Get Caller Identity
             run: aws iam create-user --user-name static-creds-test-00000000
-            
