@@ -36,7 +36,7 @@ jobs:
           - name: create user and access key
             run: | 
                 aws iam create-user --user-name static-creds-integ-test-user-${{ env.USER_NUM }}
-
+                aws iam create-access-key --user-name static-creds-integ-test-user-${{ env.USER_NUM }} | jq -r '"STATIC_ACCESS_KEY_ID=\(.AccessKey.AccessKeyId)\nSTATIC_SECRET_ACCESS_KEY=\(.AccessKey.SecretAccessKey)"' >> $GITHUB_ENV
 
           - name: delete user
-            run: aws iam delete-user --user-name static-creds-integ-test-user-${{ env.USER_NUM}}
+            run: aws iam delete-user --user-name static-creds-integ-test-user-${{ env.USER_NUM }}
