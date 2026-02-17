@@ -41,7 +41,6 @@ jobs:
                 role-to-assume: static-creds-test-role-to-assume
                 aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
                 aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
-                unset-current-credentials: true
 
           - name: check who we are
             run: aws sts get-caller-identity
