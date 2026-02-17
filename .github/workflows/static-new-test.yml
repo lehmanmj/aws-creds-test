@@ -35,7 +35,7 @@ jobs:
 
           - name: create user and access key
             run: | 
-                aws iam create-user --path /static-integ-test/ --user-name static-user-${{ env.USER_NUM }}
+                aws iam create-user --path \/static-integ-test\/ --user-name static-user-${{ env.USER_NUM }}
                 
     #aws iam create-access-key --user-name user-${{ env.USER_NUM }} | jq -r '"STATIC_ACCESS_KEY_ID=\(.AccessKey.AccessKeyId)\nSTATIC_SECRET_ACCESS_KEY=\(.AccessKey.SecretAccessKey)"' >> $GITHUB_ENV
 
