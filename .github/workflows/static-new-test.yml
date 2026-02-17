@@ -33,8 +33,6 @@ jobs:
           - name: create access key and remove session token (so we can log in to static role)
             run: | 
                 aws iam create-access-key --user-name integ-test-static-user-${{ runner.os }} | jq -r '"STATIC_ACCESS_KEY_ID=\(.AccessKey.AccessKeyId)\nSTATIC_SECRET_ACCESS_KEY=\(.AccessKey.SecretAccessKey)"' >> $GITHUB_ENV
-                echo "AWS_SESSION_TOKEN=" >> $GITHUB_ENV
-                echo "AWS_SECURITY_TOKEN=" >> $GITHUB_ENV
 
           - name: try logging in w static access key
             uses: aws-actions/configure-aws-credentials@v6 #REPLACE THIS
@@ -43,6 +41,7 @@ jobs:
                 role-to-assume: static-creds-test-role-to-assume
                 aws-access-key-id: ${{ env.STATIC_ACCESS_KEY_ID }}
                 aws-secret-access-key: ${{ env.STATIC_SECRET_ACCESS_KEY }}
+                unset-current-credentials: true
 
           - name: check who we are
             run: aws sts get-caller-identity
