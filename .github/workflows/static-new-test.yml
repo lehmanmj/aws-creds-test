@@ -30,15 +30,17 @@ jobs:
                 aws-region: us-west-2
                 role-to-assume: ${{ secrets.STATIC_USER_CREATION_ROLE }}
 
-          - name: random number for username
-            run: echo "USER_NUM=$RANDOM" >> $GITHUB_ENV
-
           - name: create user and access key
             run: | 
-                aws iam create-user --path //StaticIntegTest// --user-name static-user-${{ env.USER_NUM }}
-                aws iam create-access-key --user-name static-user-${{ env.USER_NUM }} | jq -r '"STATIC_ACCESS_KEY_ID=\(.AccessKey.AccessKeyId)\nSTATIC_SECRET_ACCESS_KEY=\(.AccessKey.SecretAccessKey)"' >> $GITHUB_ENV
+                aws iam create-user --user-name integ-test-static-user-${{ runner.os }}
+                aws iam create-access-key --user-name integ-test-static-user-${{ runner.os }} | jq -r '"STATIC_ACCESS_KEY_ID=\(.AccessKey.AccessKeyId)\nSTATIC_SECRET_ACCESS_KEY=\(.AccessKey.SecretAccessKey)"' >> $GITHUB_ENV
 
+          #- name: try logging in w static access key
+           # uses: aws-actions/configure-aws-credentials@v6 #REPLACE THIS
+           # with:
+            #    aws-region: us-west-2
+            
           - name: delete user
             run: |
-                aws iam delete-access-key --user-name static-user-${{ env.USER_NUM }} --access-key-id ${{ env.STATIC_ACCESS_KEY_ID }}
-                aws iam delete-user --user-name static-user-${{ env.USER_NUM }}
+                aws iam delete-access-key --user-name integ-test-static-user-${{ runner.os }} --access-key-id ${{ env.STATIC_ACCESS_KEY_ID }}
+                aws iam delete-user --user-name integ-test-static-user-${{ runner.os }}
