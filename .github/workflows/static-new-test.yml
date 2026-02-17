@@ -29,6 +29,8 @@ jobs:
             with:
                 aws-region: us-west-2
                 role-to-assume: ${{ secrets.STATIC_USER_CREATION_ROLE }}
+                role-skip-session-tagging: true
+                mask-aws-account-id: false
 
           - name: create access key and remove session token (so we can log in to static role)
             run: | 
