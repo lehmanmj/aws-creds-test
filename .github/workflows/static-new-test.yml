@@ -29,9 +29,11 @@ jobs:
                 aws-region: us-west-2
                 role-to-assume: ${{ secrets.STATIC_USER_CREATION_ROLE }}
 
-          - name: create access key
+          - name: create and mask access key
             run: | 
                 aws iam create-access-key --user-name integ-test-static-user-${{ runner.os }} | jq -r '"STATIC_ACCESS_KEY_ID=\(.AccessKey.AccessKeyId)\nSTATIC_SECRET_ACCESS_KEY=\(.AccessKey.SecretAccessKey)"' >> $GITHUB_ENV
+                echo "::add-mask::$STATIC_ACCESS_KEY_ID"
+                echo "::add-mask::$STATIC_SECRET_ACCESS_KEY"
 
 
           - name: sleep so key can propagate
