@@ -38,8 +38,8 @@ jobs:
                 aws iam create-access-key --user-name integ-test-static-user-${{ runner.os }} | jq -r '"STATIC_ACCESS_KEY_ID=\(.AccessKey.AccessKeyId)\nSTATIC_SECRET_ACCESS_KEY=\(.AccessKey.SecretAccessKey)"' >> $GITHUB_ENV
 
 
-          - name: see if sleeping works lol
-            run: sleep 60
+          - name: sleep on it
+            run: sleep 30
 
           - name: try logging in w static access key
             uses: aws-actions/configure-aws-credentials@v6 #REPLACE THIS
