@@ -37,8 +37,8 @@ jobs:
                 SECRET_AK=$(echo $AK_OUTPUT | jq -r '.AccessKey.SecretAccessKey')
                 echo "::add-mask::$AK_ID"
                 echo "::add-mask::$SECRET_AK"
-                echo "STATIC_ACCESS_KEY_ID=$ACCESS_KEY_ID" >> $GITHUB_OUTPUT
-                echo "STATIC_SECRET_ACCESS_KEY=$SECRET_ACCESS_KEY" >> $GITHUB_OUTPUT
+                echo "STATIC_ACCESS_KEY_ID=$AK_ID" >> $GITHUB_OUTPUT
+                echo "STATIC_SECRET_ACCESS_KEY=$SECRET_AK" >> $GITHUB_OUTPUT
 
 
 
