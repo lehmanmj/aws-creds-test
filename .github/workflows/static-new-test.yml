@@ -29,23 +29,23 @@ jobs:
                 aws-region: us-west-2
                 role-to-assume: ${{ secrets.STATIC_USER_CREATION_ROLE }}
 
-          - name: create access key and remove session token (so we can log in to static role)
+          - name: create access key
             run: | 
                 aws iam create-access-key --user-name integ-test-static-user-${{ runner.os }} | jq -r '"STATIC_ACCESS_KEY_ID=\(.AccessKey.AccessKeyId)\nSTATIC_SECRET_ACCESS_KEY=\(.AccessKey.SecretAccessKey)"' >> $GITHUB_ENV
 
 
-          - name: sleep on it
+          - name: sleep so key can propagate
             run: sleep 30
 
-          - name: try logging in w static access key
+          - name: assume role with static creds
             uses: aws-actions/configure-aws-credentials@v6 #REPLACE THIS
             with:
                 aws-region: us-west-2
-                role-to-assume: static-creds-test-role-to-assume
+                role-to-assume: ${{ secrets.STATIC_TEST_TARGET_ROLE }}
                 aws-access-key-id: ${{ env.STATIC_ACCESS_KEY_ID }}
                 aws-secret-access-key: ${{ env.STATIC_SECRET_ACCESS_KEY }}
 
-          - name: check who we are
+          - name: check account
             run: aws sts get-caller-identity
 
           - name: log back into creator role
@@ -55,7 +55,6 @@ jobs:
                 aws-region: us-west-2
                 role-to-assume: ${{ secrets.STATIC_USER_CREATION_ROLE }}
                 
-          - name: delete user
+          - name: delete access key
             run: |
                 aws iam delete-access-key --user-name integ-test-static-user-${{ runner.os }} --access-key-id ${{ env.STATIC_ACCESS_KEY_ID }}
-            #    aws iam delete-user --user-name integ-test-static-user-${{ runner.os }}
