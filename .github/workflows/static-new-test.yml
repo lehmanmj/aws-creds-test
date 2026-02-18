@@ -54,7 +54,6 @@ jobs:
                 role-to-assume: static-creds-test-role-to-assume
                 aws-access-key-id: ${{ env.STATIC_ACCESS_KEY_ID }}
                 aws-secret-access-key: ${{ env.STATIC_SECRET_ACCESS_KEY }}
-                aws-session-token: ${{ env.AWS_SESSION_TOKEN }}
                 role-skip-session-tagging: true
 
           - name: check who we are
