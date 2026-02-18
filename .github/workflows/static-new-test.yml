@@ -30,10 +30,16 @@ jobs:
                 role-to-assume: ${{ secrets.STATIC_USER_CREATION_ROLE }}
 
           - name: create and mask access key
+            id: create-key
             run: | 
-                aws iam create-access-key --user-name integ-test-static-user-${{ runner.os }} | jq -r '"STATIC_ACCESS_KEY_ID=\(.AccessKey.AccessKeyId)\nSTATIC_SECRET_ACCESS_KEY=\(.AccessKey.SecretAccessKey)"' >> $GITHUB_ENV
-                echo "::add-mask::$STATIC_ACCESS_KEY_ID"
-                echo "::add-mask::$STATIC_SECRET_ACCESS_KEY"
+                AK_OUTPUT=$(aws iam create-access-key --user-name integ-test-static-user-${{ runner.os }})
+                AK_ID=$(echo $AK_OUTPUT | jq -r '.AccessKey.AccessKeyId')
+                SECRET_AK=$(echo $AK_OUTPUT | jq -r '.AccessKey.SecretAccessKey')
+                echo "::add-mask::$AK_ID"
+                echo "::add-mask::$SECRET_AK"
+                echo "STATIC_ACCESS_KEY_ID=$ACCESS_KEY_ID" >> $GITHUB_OUTPUT
+                echo "STATIC_SECRET_ACCESS_KEY=$SECRET_ACCESS_KEY" >> $GITHUB_OUTPUT
+
 
 
           - name: sleep so key can propagate
@@ -44,8 +50,8 @@ jobs:
             with:
                 aws-region: us-west-2
                 role-to-assume: ${{ secrets.STATIC_TEST_TARGET_ROLE }}
-                aws-access-key-id: ${{ env.STATIC_ACCESS_KEY_ID }}
-                aws-secret-access-key: ${{ env.STATIC_SECRET_ACCESS_KEY }}
+                aws-access-key-id: ${{ steps.create-key.outputs.STATIC_ACCESS_KEY_ID }}
+                aws-secret-access-key: ${{ steps.create-key.outputs.STATIC_SECRET_ACCESS_KEY }}
 
           - name: check account
             run: aws sts get-caller-identity
@@ -59,4 +65,4 @@ jobs:
                 
           - name: delete access key
             run: |
-                aws iam delete-access-key --user-name integ-test-static-user-${{ runner.os }} --access-key-id ${{ env.STATIC_ACCESS_KEY_ID }}
+                aws iam delete-access-key --user-name integ-test-static-user-${{ runner.os }} --access-key-id ${{ steps.create-key.outputs.STATIC_ACCESS_KEY_ID }}
