@@ -38,14 +38,8 @@ jobs:
                 aws iam create-access-key --user-name integ-test-static-user-${{ runner.os }} | jq -r '"STATIC_ACCESS_KEY_ID=\(.AccessKey.AccessKeyId)\nSTATIC_SECRET_ACCESS_KEY=\(.AccessKey.SecretAccessKey)"' >> $GITHUB_ENV
 
 
-          - name: log into spoke?
-            uses: aws-actions/configure-aws-credentials@v6
-            with:
-                aws-region: us-west-2
-                role-to-assume: arn:aws:iam::884348119369:role/debug-spoke
-                role-skip-session-tagging: true
-                mask-aws-account-id: false
-                role-chaining: true
+          - name: see if sleeping works lol
+            run: sleep 60
 
           - name: try logging in w static access key
             uses: aws-actions/configure-aws-credentials@v6 #REPLACE THIS
