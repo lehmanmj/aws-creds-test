@@ -8,14 +8,12 @@ jobs:
             id-token: write
         strategy: 
             fail-fast: false
-            #matrix:
-                #os: [windows-latest, ubuntu-latest, macos-latest]
-        #runs-on: ${{ matrix.os }}
-        runs-on: ubuntu-latest
+            matrix:
+                os: [windows-latest, ubuntu-latest, macos-latest]
+        runs-on: ${{ matrix.os }}
         defaults: 
             run:
                 shell: bash
-        #runs-on: ubuntu-latest
         name: Static IAM creds test
         steps:
             #UNCOMMENT THIS ONE
@@ -30,8 +28,6 @@ jobs:
             with:
                 aws-region: us-west-2
                 role-to-assume: ${{ secrets.STATIC_USER_CREATION_ROLE }}
-                role-skip-session-tagging: true
-                mask-aws-account-id: false
 
           - name: create access key and remove session token (so we can log in to static role)
             run: | 
@@ -48,11 +44,17 @@ jobs:
                 role-to-assume: static-creds-test-role-to-assume
                 aws-access-key-id: ${{ env.STATIC_ACCESS_KEY_ID }}
                 aws-secret-access-key: ${{ env.STATIC_SECRET_ACCESS_KEY }}
-                role-skip-session-tagging: true
 
           - name: check who we are
             run: aws sts get-caller-identity
-            
+
+          - name: log back into creator role
+            #uses: ./
+            uses: aws-actions/configure-aws-credentials@v6 #REPLACE THIS
+            with:
+                aws-region: us-west-2
+                role-to-assume: ${{ secrets.STATIC_USER_CREATION_ROLE }}
+                
           - name: delete user
             run: |
                 aws iam delete-access-key --user-name integ-test-static-user-${{ runner.os }} --access-key-id ${{ env.STATIC_ACCESS_KEY_ID }}
