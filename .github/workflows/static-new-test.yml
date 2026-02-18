@@ -11,6 +11,9 @@ jobs:
             matrix:
                 os: [windows-latest, ubuntu-latest, macos-latest]
         runs-on: ${{ matrix.os }}
+        defaults: 
+            run:
+                shell: bash
         name: Static IAM creds test
         steps:
             #UNCOMMENT THIS ONE
@@ -51,7 +54,7 @@ jobs:
             with:
                 aws-region: us-west-2
                 role-to-assume: ${{ secrets.STATIC_USER_CREATION_ROLE }}
-
+                
           - name: delete user
             run: |
                 aws iam delete-access-key --user-name integ-test-static-user-${{ runner.os }} --access-key-id ${{ env.STATIC_ACCESS_KEY_ID }}
