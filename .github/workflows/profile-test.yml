@@ -46,7 +46,7 @@ jobs:
             aws configure set aws_session_token ${{ steps.creds2.outputs.aws-session-token }} --profile TestProfile2
 
       - name: can we look at buckets w profile2
-        run: aws s3 ls --profile TestProfile2
+        run: aws s3 get-bucket-location --bucket lehmanmj-profile-test-2
 
       - name: can we still look at buckets w profile1
         run: aws s3 ls --profile TestProfile1
