@@ -1,0 +1,16 @@
+name: profile test
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: see what happens if we check our identity no login
+        run: aws sts get-caller-identity 
+
+      
+
