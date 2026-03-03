@@ -50,3 +50,9 @@ jobs:
 
       - name: can we still look at buckets w profile1
         run: aws s3 ls --profile TestProfile1
+
+      - name: look at our profiles 
+        run: cat ~/.aws/credentials
+
+      - name: look at our profiles
+        run: cat ~/.aws/config
