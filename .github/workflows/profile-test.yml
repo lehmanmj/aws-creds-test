@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: try first region
+      - name: make profile 1
         id: creds1
         uses: aws-actions/configure-aws-credentials@v6
         with: 
@@ -29,5 +29,18 @@ jobs:
       - name: can we look at buckets w profile
         run: aws s3 ls --profile TestProfile1
 
-      - name: can we look at buckets w/o profile
+      - name: make profile 2
+        id: creds2
+        uses: aws-actions/configure-aws-credentials@v6
+        with: 
+          role-to-assume: arn:aws:iam::884348119369:role/profile-test-2
+          aws-region: us-east-2
+          output-credentials: true
+          #output-env-credentials: false
+          disable-retry: true
+
+      - name: can we look at buckets w profile2
         run: aws s3 ls
+
+      - name: can we still look at buckets w profile1
+        run: aws s3 ls --profile TestProfile1
