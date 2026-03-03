@@ -9,8 +9,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: see what happens if we check our identity no login
-        run: aws sts get-caller-identity 
 
-      
+      - name: try first region
+        id: creds1
+        uses: aws-actions/configure-aws-credentials@v6
+        with: 
+          role-to-assume: arn:aws:iam::884348119369:role/profile-test-1
+          aws-region: us-east-1
+          output-credentials: true
+          output-env-credentials: false
+          disable-retry: true
 
+      - name: see what happens if we login w no env creds 
+        run: aws sts get-caller-identity
