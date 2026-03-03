@@ -20,5 +20,11 @@ jobs:
           output-env-credentials: false
           disable-retry: true
 
-      - name: see what happens if we login w no env creds 
+      - name: configure profile 
+        run: |
+            aws configure set aws_access_key_id ${{ steps.creds1.outputs.aws-access-key-id }} --profile TestProfile1
+            aws configure set aws_secret_access_key ${{ steps.creds1.outputs.aws-secret-access-key }} --profile TestProfile1
+            aws configure set aws_session_token ${{ steps.creds1.outputs.aws-session-token }} --profile TestProfile1
+
+      - name: see what happens if we login w no env creds (should succeed )
         run: aws sts get-caller-identity
