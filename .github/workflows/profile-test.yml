@@ -28,3 +28,6 @@ jobs:
 
       - name: can we look at buckets w profile
         run: aws s3 ls --profile TestProfile1
+
+      - name: can we look at buckets w/o profile
+        run: aws s3 ls
