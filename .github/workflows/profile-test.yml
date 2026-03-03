@@ -36,11 +36,17 @@ jobs:
           role-to-assume: arn:aws:iam::884348119369:role/profile-test-2
           aws-region: us-east-2
           output-credentials: true
-          #output-env-credentials: false
+          output-env-credentials: false
           disable-retry: true
 
+      - name: configure profile 2
+        run: |
+            aws configure set aws_access_key_id ${{ steps.creds2.outputs.aws-access-key-id }} --profile TestProfile2
+            aws configure set aws_secret_access_key ${{ steps.creds2.outputs.aws-secret-access-key }} --profile TestProfile2
+            aws configure set aws_session_token ${{ steps.creds2.outputs.aws-session-token }} --profile TestProfile2
+
       - name: can we look at buckets w profile2
-        run: aws s3 ls
+        run: aws s3 ls --profile TestProfile2
 
       - name: can we still look at buckets w profile1
         run: aws s3 ls --profile TestProfile1
