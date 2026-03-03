@@ -26,5 +26,5 @@ jobs:
             aws configure set aws_secret_access_key ${{ steps.creds1.outputs.aws-secret-access-key }} --profile TestProfile1
             aws configure set aws_session_token ${{ steps.creds1.outputs.aws-session-token }} --profile TestProfile1
 
-      - name: can we login w profile
-        run: aws sts get-caller-identity --profile TestProfile1
+      - name: can we look at buckets w profile
+        run: aws s3 ls --profile TestProfile1
