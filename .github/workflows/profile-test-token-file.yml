@@ -12,14 +12,55 @@ jobs:
             - name: get stuff
               uses: actions/checkout@v4
             - run: ls
-            - name: run the thing
+            - name: grab token
               run: node fetch-token.js
-            - name: try cawsc
+
+            - name: make profile 1
+              id: creds1
               uses: aws-actions/configure-aws-credentials@v6
-              with:
-                aws-region: us-east-1
+              with: 
                 role-to-assume: arn:aws:iam::884348119369:role/profile-test-1
+                aws-region: us-east-1
                 web-identity-token-file: token.txt
-                retry-max-attempts: 4
-            - name: check creds
-              run: aws sts get-caller-identity
+                output-credentials: true
+                output-env-credentials: false
+                disable-retry: true
+
+            - name: configure profile 
+              run: |
+                    aws configure set aws_access_key_id ${{ steps.creds1.outputs.aws-access-key-id }} --profile TestProfile1
+                    aws configure set aws_secret_access_key ${{ steps.creds1.outputs.aws-secret-access-key }} --profile TestProfile1
+                    aws configure set aws_session_token ${{ steps.creds1.outputs.aws-session-token }} --profile TestProfile1
+
+            - name: can we look at buckets w profile
+              run: aws s3 ls --profile TestProfile1
+
+
+            - name: grab token again
+              run: node fetch-token.js
+
+            - name: make profile 2
+              id: creds2
+              uses: aws-actions/configure-aws-credentials@v6
+              with: 
+                role-to-assume: arn:aws:iam::884348119369:role/profile-test-2
+                aws-region: us-east-2
+                web-identity-token-file: token.txt
+                output-credentials: true
+                output-env-credentials: false
+                disable-retry: true
+
+            - name: configure profile 2
+              run: |
+                    aws configure set aws_access_key_id ${{ steps.creds2.outputs.aws-access-key-id }} --profile TestProfile2
+                    aws configure set aws_secret_access_key ${{ steps.creds2.outputs.aws-secret-access-key }} --profile TestProfile2
+                    aws configure set aws_session_token ${{ steps.creds2.outputs.aws-session-token }} --profile TestProfile2
+
+            - name: can we look at buckets w profile2
+              run: aws --profile TestProfile2 s3api get-bucket-location --bucket lehmanmj-profile-test-2
+
+            - name: can we still look at buckets w profile1
+              run: aws s3 ls --profile TestProfile1
+
+            - name: look at our profiles 
+              run: cat ~/.aws/credentials
