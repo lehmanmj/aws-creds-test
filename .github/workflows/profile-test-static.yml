@@ -8,7 +8,7 @@ jobs:
         steps:
             - name: make profile 1
               id: creds1
-              uses: aws-actions/configure-aws-credentials@v5
+              uses: aws-actions/configure-aws-credentials@v6
               with: 
                 role-to-assume: arn:aws:iam::884348119369:role/profile-test-1
                 aws-region: us-east-1
@@ -16,7 +16,7 @@ jobs:
                 aws-secret-access-key: ${{ secrets.PROFILE_1_SECRET_AK }}
                 output-credentials: true
                 output-env-credentials: false
-                disable-retry: true
+                retry-max-attempts: 6
 
             - name: configure profile 
               run: |
@@ -29,7 +29,7 @@ jobs:
 
             - name: make profile 2
               id: creds2
-              uses: aws-actions/configure-aws-credentials@v5
+              uses: aws-actions/configure-aws-credentials@v6
               with: 
                 role-to-assume: arn:aws:iam::884348119369:role/profile-test-2
                 aws-region: us-east-2
