@@ -9,13 +9,10 @@ jobs:
         steps:
           - name: checkout code
             uses: actions/checkout@v2
-
-          - name: List All Environment Variables
-            run: secrets
             
           - name: first static
             id: static-1
-            uses: aws-actions/configure-aws-credentials@v1
+            uses: aws-actions/configure-aws-credentials@v6
             with:
                 aws-access-key-id: ${{ secrets.STATIC_1_AK_ID }}
                 aws-secret-access-key: ${{ secrets.STATIC_1_SECRET_AK }}
