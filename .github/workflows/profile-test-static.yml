@@ -36,7 +36,7 @@ jobs:
                 aws-access-key-id: ${{ secrets.PROFILE_2_AK_ID }}
                 aws-secret-access-key: ${{ secrets.PROFILE_2_SECRET_AK }}
                 output-credentials: true
-                output-env-credentials: false
+                #output-env-credentials: false
                 disable-retry: true
 
             - name: configure profile 2
