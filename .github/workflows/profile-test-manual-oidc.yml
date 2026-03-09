@@ -16,10 +16,10 @@ jobs:
 
       - name: Configure AWS Profile
         run: |
-          curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com" | jq -r '.value' > ~/.aws/web_identity_token_file
+          curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com" | jq -r '.value' > ~/.aws/web_identity_token_filea
           aws configure set region us-west-2 --profile TestProfile1
           aws configure set role_arn "arn:aws:iam::884348119369:role/profile-test-1" --profile TestProfile1
-          aws configure set web_identity_token_file "~/.aws/web_identity_token_file" --profile TestProfile1
+          aws configure set web_identity_token_file "~/.aws/web_identity_token_filea" --profile TestProfile1
 
       - name: check profile1 
         run: aws sts get-caller-identity --profile TestProfile1
