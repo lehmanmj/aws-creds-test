@@ -21,6 +21,11 @@ jobs:
           aws configure set role_arn "arn:aws:iam::884348119369:role/profile-test-1" --profile TestProfile1
           aws configure set web_identity_token_file "~/.aws/web_identity_token_filea" --profile TestProfile1
 
+      - name: hi
+        run: |
+          cd ~/.aws
+          ls
+
       - name: check profile1 
         run: aws sts get-caller-identity --profile TestProfile1
       
