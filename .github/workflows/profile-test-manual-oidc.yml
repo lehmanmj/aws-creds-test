@@ -23,9 +23,12 @@ jobs:
 
       - name: hi
         run: |
+          pwd
           cd ~/.aws
           ls
 
       - name: check profile1 
-        run: aws sts get-caller-identity --profile TestProfile1
+        run: |
+            pwd
+            aws sts get-caller-identity --profile TestProfile1
       
