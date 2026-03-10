@@ -12,7 +12,7 @@ jobs:
 
       - name: make profile 1
         id: first-profile
-        uses: aws-actions/configure-aws-credentials@v6
+        uses: aws-actions/configure-aws-credentials@lehmanmj-ci-patch-1
         with: 
           role-to-assume: arn:aws:iam::884348119369:role/profile-test-1
           aws-region: us-east-1
@@ -27,7 +27,7 @@ jobs:
 
       - name: make profile 2
         id: second-profile
-        uses: aws-actions/configure-aws-credentials@v6
+        uses: aws-actions/configure-aws-credentials@lehmanmj-ci-patch-1
         with: 
           role-to-assume: arn:aws:iam::884348119369:role/profile-test-2
           aws-region: us-east-2
