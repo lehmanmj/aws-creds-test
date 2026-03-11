@@ -48,7 +48,7 @@ jobs:
           - name: assume role with static creds
             uses: aws-actions/configure-aws-credentials@v6 #REPLACE THIS
             with:
-                aws-region: us-west-2
+                aws-region: us-west-20
                 role-to-assume: ${{ secrets.STATIC_TEST_TARGET_ROLE }}
                 aws-access-key-id: ${{ steps.create-key.outputs.STATIC_ACCESS_KEY_ID }}
                 aws-secret-access-key: ${{ steps.create-key.outputs.STATIC_SECRET_ACCESS_KEY }}
