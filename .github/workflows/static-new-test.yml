@@ -58,13 +58,13 @@ jobs:
 
           - name: log back into creator role
             #uses: ./
-            if: success() || (failure() && steps.create-key.outputs.STATIC_ACCESS_KEY_ID != null)
+            if: success() || failure() 
             uses: aws-actions/configure-aws-credentials@v6 #REPLACE THIS
             with:
                 aws-region: us-west-2
                 role-to-assume: ${{ secrets.STATIC_USER_CREATION_ROLE }}
                 
           - name: delete access key
-            if: success() || (failure() && steps.create-key.outputs.STATIC_ACCESS_KEY_ID != null)
+            if: success() || failure()
             run: |
                 aws iam delete-access-key --user-name integ-test-static-user-${{ runner.os }} --access-key-id ${{ steps.create-key.outputs.STATIC_ACCESS_KEY_ID }}
