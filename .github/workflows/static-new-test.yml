@@ -29,10 +29,14 @@ jobs:
                 aws-region: us-west-2
                 role-to-assume: ${{ secrets.STATIC_USER_CREATION_ROLE }}
 
-          - name: create and mask access key
+          - name: create access key
             id: create-key
+            run: AK_OUTPUT=$(aws iam create-access-key --user-name integ-test-static-user-${{ runner.os }})
+            
+
+          - name: mask access key
+            id: mask-key
             run: | 
-                AK_OUTPUT=$(aws iam create-access-key --user-name integ-test-static-user-${{ runner.os }})
                 AK_ID=$(echo $AK_OUTPUT | jq -r '.AccessKey.AccessKeyId')
                 SECRET_AK=$(echo $AK_OUTPUT | jq -r '.AccessKey.SecretAccessKey')
                 echo "::add-mask::$AK_ID"
