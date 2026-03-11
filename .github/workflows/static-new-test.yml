@@ -29,17 +29,10 @@ jobs:
                 aws-region: us-west-2
                 role-to-assume: ${{ secrets.STATIC_USER_CREATION_ROLE }}
 
-          - name: create access key
+          - name: create and mask access key
             id: create-key
-            run: |
-                AK_OUTPUT=$(aws iam create-access-key --user-name integ-test-static-user-${{ runner.os }})
-                echo "add-mask::$AK_OUTPUT"
-                echo "AK_OUTPUT=$AK_OUTPUT" >> $GITHUB_ENV
-
-
-          - name: mask access key
-            id: mask-key
             run: | 
+                AK_OUTPUT=$(aws iam create-access-key --user-name integ-test-static-user-${{ runner.os }})
                 AK_ID=$(echo $AK_OUTPUT | jq -r '.AccessKey.AccessKeyId')
                 SECRET_AK=$(echo $AK_OUTPUT | jq -r '.AccessKey.SecretAccessKey')
                 echo "::add-mask::$AK_ID"
@@ -71,5 +64,6 @@ jobs:
                 role-to-assume: ${{ secrets.STATIC_USER_CREATION_ROLE }}
                 
           - name: delete access key
+            if: steps.create-key.outputs.STATIC_ACCESS_KEY_ID != null
             run: |
                 aws iam delete-access-key --user-name integ-test-static-user-${{ runner.os }} --access-key-id ${{ steps.create-key.outputs.STATIC_ACCESS_KEY_ID }}
