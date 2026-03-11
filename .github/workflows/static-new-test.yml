@@ -58,6 +58,7 @@ jobs:
 
           - name: log back into creator role
             #uses: ./
+            if: steps.create-key.outputs.STATIC_ACCESS_KEY_ID != null
             uses: aws-actions/configure-aws-credentials@v6 #REPLACE THIS
             with:
                 aws-region: us-west-2
