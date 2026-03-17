@@ -12,33 +12,23 @@ jobs:
 
       - name: make profile 1
         id: first-profile
-        uses: aws-actions/configure-aws-credentials@lehmanmj-ci-patch-1
+        uses: aws-actions/configure-aws-credentials@jfeddern-feat/multiple-profiles
         with: 
           role-to-assume: arn:aws:iam::884348119369:role/profile-test-1
           aws-region: us-east-1
           output-credentials: true
           output-env-credentials: false
-
-      - name: configure profile 1
-        run: |
-            aws configure set aws_access_key_id ${{ steps.first-profile.outputs.aws-access-key-id }} --profile TestProfile1
-            aws configure set aws_secret_access_key ${{ steps.first-profile.outputs.aws-secret-access-key }} --profile TestProfile1
-            aws configure set aws_session_token ${{ steps.first-profile.outputs.aws-session-token }} --profile TestProfile1
+          aws-profile: TestProfile1
 
       - name: make profile 2
         id: second-profile
-        uses: aws-actions/configure-aws-credentials@lehmanmj-ci-patch-1
+        uses: aws-actions/configure-aws-credentials@jfeddern-feat/multiple-profiles
         with: 
           role-to-assume: arn:aws:iam::884348119369:role/profile-test-2
           aws-region: us-east-2
           output-credentials: true
           output-env-credentials: false
-
-      - name: configure profile 2
-        run: |
-            aws configure set aws_access_key_id ${{ steps.second-profile.outputs.aws-access-key-id }} --profile TestProfile2
-            aws configure set aws_secret_access_key ${{ steps.second-profile.outputs.aws-secret-access-key }} --profile TestProfile2
-            aws configure set aws_session_token ${{ steps.second-profile.outputs.aws-session-token }} --profile TestProfile2
+          aws-profile: TestProfile2
 
       - name: check profile1 
         run: aws sts get-caller-identity --profile TestProfile1
