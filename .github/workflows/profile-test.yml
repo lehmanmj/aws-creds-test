@@ -12,7 +12,7 @@ jobs:
 
       - name: check config
         run: |
-          ls ~/.aws
+          ls ~
 
       - name: check env
         run: |
