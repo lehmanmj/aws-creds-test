@@ -16,7 +16,7 @@ jobs:
                 aws-secret-access-key: ${{ secrets.PROFILE_1_SECRET_AK }}
                 #output-env-credentials: false
                 retry-max-attempts: 6
-                #aws-profile: TestProfile1
+                aws-profile: TestProfile1
 
             - name: can we look at buckets w profile
               run: aws s3 ls --profile TestProfile1
