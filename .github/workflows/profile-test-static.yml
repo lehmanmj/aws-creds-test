@@ -17,7 +17,6 @@ jobs:
                 output-credentials: true
                 #output-env-credentials: false
                 retry-max-attempts: 6
-                aws-profile: TestProfile1
 
             - name: can we look at buckets w profile
               run: aws s3 ls --profile TestProfile1
