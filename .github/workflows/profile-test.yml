@@ -7,8 +7,17 @@ permissions:
 
 jobs:
   test:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
+
+      - name: check config
+        run: |
+          ls ~/.aws
+
+      - name: check env
+        run: |
+          env
+
 
       - name: make profile 1
         id: first-profile
