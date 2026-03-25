@@ -28,6 +28,9 @@ jobs:
           output-credentials: true
           output-env-credentials: false
           aws-profile: TestProfile1
+        env:
+          AWS_CONFIG_FILE: ''
+          AWS_CREDENTIALS_FILE: ''
 
       - name: make profile 2
         id: second-profile
