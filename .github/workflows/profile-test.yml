@@ -44,6 +44,11 @@ jobs:
           output-env-credentials: false
           aws-profile: TestProfile2
 
+      - name: did we actually make folder
+        run: |
+          ls ~
+          ls ~/newAwsDir
+
       - name: check profile1 
         run: aws sts get-caller-identity --profile TestProfile1
       
