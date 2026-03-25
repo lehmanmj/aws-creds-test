@@ -58,7 +58,7 @@ jobs:
       - name: see if we made an aws
         run: |
           ls -la ~
-          ls /newAwsDir
+          ls newAwsDir
 
         
       
