@@ -5,10 +5,6 @@ on:
 permissions:
   id-token: write
 
-env: 
-  AWS_CONFIG_FILE: ./newAwsDir/myFolder1/config
-  AWS_SHARED_CREDENTIALS_FILE: ./newAwsDir/myFolder2/credentials
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -16,8 +12,7 @@ jobs:
 
       - name: check config
         run: |
-          ls -la ~
-          ls -la
+          ls ~
 
       - name: check env
         run: |
@@ -44,22 +39,10 @@ jobs:
           output-env-credentials: false
           aws-profile: TestProfile2
 
-      - name: did we actually make folder
-        run: |
-          ls ~
-          ls 
-
       - name: check profile1 
         run: aws sts get-caller-identity --profile TestProfile1
       
       - name: check profile2
         run: aws sts get-caller-identity --profile TestProfile2
-        
-      - name: see if we made an aws
-        run: |
-          ls -la ~
-          ls newAwsDir
-
-        
       
       
