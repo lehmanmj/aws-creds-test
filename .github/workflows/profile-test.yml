@@ -13,6 +13,9 @@ jobs:
       - name: check config
         run: |
           ls ~
+          pwd
+
+     
 
       - name: check env
         run: |
