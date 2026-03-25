@@ -38,6 +38,7 @@ jobs:
           output-credentials: true
           output-env-credentials: false
           aws-profile: TestProfile1
+          overwrite-aws-profile: true
 
       - name: check profile1 
         run: aws sts get-caller-identity --profile TestProfile1
