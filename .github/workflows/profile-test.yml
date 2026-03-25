@@ -7,7 +7,7 @@ permissions:
 
 env: 
   AWS_CONFIG_FILE: ~/newAwsDir/myFolder1/config
-  AWS_CREDENTIALS_FILE: ~/newAwsDir/myFolder2/credentials
+  AWS_SHARED_CREDENTIALS_FILE: ~/newAwsDir/myFolder2/credentials
 
 jobs:
   test:
@@ -33,9 +33,6 @@ jobs:
           output-credentials: true
           output-env-credentials: false
           aws-profile: TestProfile1
-        env:
-          AWS_CONFIG_FILE: '1'
-          AWS_CREDENTIALS_FILE: '2'
 
       - name: make profile 2
         id: second-profile
