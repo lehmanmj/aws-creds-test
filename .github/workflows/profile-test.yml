@@ -50,5 +50,8 @@ jobs:
       
       - name: check profile2
         run: aws sts get-caller-identity --profile TestProfile2
+        
+      - name: see if we made an aws
+        run: ls ~
       
       
