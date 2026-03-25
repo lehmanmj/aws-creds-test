@@ -12,10 +12,13 @@ jobs:
 
       - name: check config
         run: |
-          ls -la ~
+          ls ~
           pwd
 
-     
+      - name: set env
+        run: |
+          echo "AWS_CONFIG_FILE=~/newAwsDir/myFolder1/config" >> GITHUB_ENV
+          echo "AWS_CREDENTIALS_FILE=~/newAwsDir/myFolder2/credentials" >> GITHUB_ENV
 
       - name: check env
         run: |
@@ -52,6 +55,6 @@ jobs:
         run: aws sts get-caller-identity --profile TestProfile2
         
       - name: see if we made an aws
-        run: ls -la ~
+        run: ls ~
       
       
