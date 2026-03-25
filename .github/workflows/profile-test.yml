@@ -37,7 +37,7 @@ jobs:
           aws-region: us-east-2
           output-credentials: true
           output-env-credentials: false
-          aws-profile: TestProfile1
+          aws-profile: TestProfile2
 
       - name: check profile1 
         run: aws sts get-caller-identity --profile TestProfile1
