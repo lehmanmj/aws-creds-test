@@ -16,10 +16,10 @@ jobs:
                 aws-secret-access-key: ${{ secrets.PROFILE_1_SECRET_AK }}
                 #output-env-credentials: false
                 retry-max-attempts: 6
-                #aws-profile: TestProfile1
+                aws-profile: TestProfile1
 
             - name: can we look at buckets w profile
-              run: aws s3 ls 
+              run: aws s3 ls --profile TestProfile1
 
             - name: make profile 2
               id: creds2
@@ -38,7 +38,7 @@ jobs:
               run: aws --profile TestProfile2 s3api get-bucket-location --bucket lehmanmj-profile-test-2
 
             - name: can we still look at buckets w profile1
-              run: aws s3 ls
+              run: aws s3 ls --profile TestProfile1
 
             - name: look at our profiles 
               run: cat ~/.aws/credentials
