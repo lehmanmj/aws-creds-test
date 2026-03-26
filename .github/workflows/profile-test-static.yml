@@ -32,7 +32,7 @@ jobs:
                 output-credentials: true
                 #output-env-credentials: false
                 disable-retry: true
-                aws-profile: TestProfile2
+                #aws-profile: TestProfile2
 
             - name: can we look at buckets w profile2
               run: aws --profile TestProfile2 s3api get-bucket-location --bucket lehmanmj-profile-test-2
