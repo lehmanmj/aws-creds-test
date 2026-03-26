@@ -34,7 +34,7 @@ jobs:
                 disable-retry: true
                 aws-profile: TestProfile2
               env:
-                AWS-PROFILE: ""
+                AWS_PROFILE: ""
 
             - name: can we look at buckets w profile2
               run: aws --profile TestProfile2 s3api get-bucket-location --bucket lehmanmj-profile-test-2
