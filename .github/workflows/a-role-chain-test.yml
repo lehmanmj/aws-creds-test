@@ -16,9 +16,7 @@ jobs:
             role-session-name: MySessionName
             retry-max-attempts: 6
             aws-profile: firstRoleInChain
-      - name: Get Caller Identity
-        run: |
-          aws sts get-caller-identity
+            output-env-credentials: false
       - name: assume second role
         uses: aws-actions/configure-aws-credentials@jfeddern-feat/multiple-profiles
         with:
@@ -28,8 +26,8 @@ jobs:
             role-chaining: true
             retry-max-attempts: 6
             aws-profile: secondRoleInChain
+            output-env-credentials: false
       - name: get caller identity
         run: |
-          aws sts get-caller-identity
           aws sts get-caller-identity --profile firstRoleInChain
           aws sts get-caller-identity --profile secondRoleInChain
