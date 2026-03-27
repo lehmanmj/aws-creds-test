@@ -1,0 +1,26 @@
+name: regression test v6 caller
+
+on:
+    workflow_dispatch:
+
+permissions: 
+    id-token: write
+    contents: read
+
+jobs:
+    check-env-initially:
+        runs-on: ubuntu-24.04
+        steps: 
+            - name: print env
+              run: env
+    do-the-thing:
+        uses: ./.github/workflows/v5-test.yml
+    check-creds:
+        runs-on: ubuntu-24.04
+        steps:
+            - name: print env
+              run: env
+            - name: check identity
+              run: aws sts get-caller-identity
+
+
