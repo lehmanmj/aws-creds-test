@@ -14,7 +14,7 @@ jobs:
             - name: print env
               run: env
     do-the-thing:
-        uses: ./.github/workflows/v5-test.yml
+        uses: lehmanmj/aws-creds-test/.github/workflows/v5-test.yml@main
     check-creds:
         runs-on: ubuntu-24.04
         steps:
