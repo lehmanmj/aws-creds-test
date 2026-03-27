@@ -25,7 +25,6 @@ jobs:
         with: 
           role-to-assume: arn:aws:iam::884348119369:role/profile-test-1
           aws-region: us-east-1
-          output-credentials: true
           aws-profile: TestProfile1
 
       - name: make profile 2
@@ -34,7 +33,6 @@ jobs:
         with: 
           role-to-assume: arn:aws:iam::884348119369:role/profile-test-2
           aws-region: us-east-2
-          output-credentials: true
           aws-profile: TestProfile2
 
       - name: see if we have anything in env
