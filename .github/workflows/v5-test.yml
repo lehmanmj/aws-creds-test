@@ -3,20 +3,16 @@ on:
 
 jobs:
     do-the-thing:
-        name: test out v5 w secrets
+        name: test out v5
         permissions:
             id-token: write
+            contents: read
         runs-on: ubuntu-latest
         steps:
           - name: configure AWS Creds
-            uses: aws-actions/configure-aws-credentials@maintux-nn-feat/add-transitive-tag-keys
+            uses: aws-actions/configure-aws-credentials@v5
             with:
-                aws-region: us-east-2
                 role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-                role-duration-seconds: 900
-                role-session-name: SecretsManagerFetch
-                retry-max-attempts: 6
-                transitive-tag-keys: |
-                    Repository
-                    GitHub
-                    Action
+                aws-region: eu-west-1
+                role-duration-seconds: 3600
+                audience: sts.amazonaws.com
