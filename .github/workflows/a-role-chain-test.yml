@@ -23,6 +23,8 @@ jobs:
             role-chaining: true
             retry-max-attempts: 6
             aws-profile: secondRoleInChain
+        env:
+          AWS_PROFILE: firstRoleInChain
       - name: get caller identity and see if env is changed
         run: |
           aws sts get-caller-identity --profile firstRoleInChain
