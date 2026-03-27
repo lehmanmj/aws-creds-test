@@ -15,7 +15,7 @@ jobs:
             role-to-assume: arn:aws:iam::884348119369:role/first-role-to-test
             role-session-name: MySessionName
             retry-max-attempts: 6
-            aws-profile: default
+            aws-profile: firstRoleInChain
             output-env-credentials: false
       - name: assume second role
         uses: aws-actions/configure-aws-credentials@jfeddern-feat/multiple-profiles
@@ -26,8 +26,11 @@ jobs:
             role-chaining: true
             retry-max-attempts: 6
             aws-profile: secondRoleInChain
-            #output-env-credentials: false
-      - name: get caller identity
+            output-env-credentials: false
+        env:
+          AWS_PROFILE: firstRoleInChain
+      - name: get caller identity and see if env is changed
         run: |
           aws sts get-caller-identity --profile firstRoleInChain
           aws sts get-caller-identity --profile secondRoleInChain
+          env
