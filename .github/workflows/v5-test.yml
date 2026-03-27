@@ -8,7 +8,7 @@ jobs:
         runs-on: ubuntu-24.04
         steps:
           - name: configure AWS Creds
-            uses: aws-actions/configure-aws-credentials@v5
+            uses: aws-actions/configure-aws-credentials@v6
             with:
                 role-to-assume: arn:aws:iam::891612571239:role/githubActionTest-Role-5YBrxygEBfRs
                 aws-region: eu-west-1
