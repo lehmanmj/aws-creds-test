@@ -15,3 +15,5 @@ jobs:
                 aws-region: eu-west-1
                 role-duration-seconds: 3600
                 audience: sts.amazonaws.com
+          - name: check creds
+            run: aws sts get-caller-identity
