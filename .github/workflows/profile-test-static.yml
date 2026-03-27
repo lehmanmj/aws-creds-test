@@ -27,7 +27,7 @@ jobs:
               run: aws sts get-caller-identity --profile TestProfile1
 
             - name: check identity in general
-              run: aws sts-get-caller-identity
+              run: aws sts get-caller-identity
 
 
 
