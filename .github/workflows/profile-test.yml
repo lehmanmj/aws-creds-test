@@ -35,9 +35,6 @@ jobs:
           aws-region: us-east-2
           aws-profile: TestProfile2
 
-      - name: see if we have anything in env
-        run: aws sts get-caller-identity
-
       - name: check profile1 
         run: aws sts get-caller-identity --profile TestProfile1
       
