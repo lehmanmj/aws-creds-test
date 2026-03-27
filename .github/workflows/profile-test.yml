@@ -26,6 +26,7 @@ jobs:
           role-to-assume: arn:aws:iam::884348119369:role/profile-test-1
           aws-region: us-east-1
           aws-profile: TestProfile1
+          output-env-credentials: true
 
       - name: make profile 2
         id: second-profile
@@ -34,6 +35,7 @@ jobs:
           role-to-assume: arn:aws:iam::884348119369:role/profile-test-2
           aws-region: us-east-2
           aws-profile: TestProfile2
+          output-env-credentials: true
 
       - name: check profile1 
         run: aws sts get-caller-identity --profile TestProfile1
