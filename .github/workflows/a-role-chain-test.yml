@@ -16,7 +16,7 @@ jobs:
             role-session-name: MySessionName
             retry-max-attempts: 6
             aws-profile: firstRoleInChain
-            #output-env-credentials: false
+            output-env-credentials: false
       - name: assume second role
         uses: aws-actions/configure-aws-credentials@jfeddern-feat/multiple-profiles
         with:
