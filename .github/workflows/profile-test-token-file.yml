@@ -22,9 +22,6 @@ jobs:
                 role-to-assume: arn:aws:iam::884348119369:role/profile-test-1
                 aws-region: us-east-1
                 web-identity-token-file: token.txt
-                output-credentials: true
-                output-env-credentials: false
-                disable-retry: true
                 aws-profile: TestProfile1
 
             - name: can we look at buckets w profile
@@ -41,9 +38,6 @@ jobs:
                 role-to-assume: arn:aws:iam::884348119369:role/profile-test-2
                 aws-region: us-east-2
                 web-identity-token-file: token.txt
-                output-credentials: true
-                output-env-credentials: false
-                disable-retry: true
                 aws-profile: TestProfile2
 
             - name: can we look at buckets w profile2
