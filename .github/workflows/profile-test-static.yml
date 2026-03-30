@@ -16,7 +16,6 @@ jobs:
                 aws-secret-access-key: ${{ secrets.PROFILE_1_SECRET_AK }}
                 aws-profile: TestProfile1
                 role-chaining: true
-                output-env-credentials: true
               env:
                 AWS_PROFILE: TestProfile1
 
@@ -33,7 +32,6 @@ jobs:
                 aws-secret-access-key: ${{ secrets.PROFILE_2_SECRET_AK }}
                 aws-profile: TestProfile2
                 role-chaining: true
-                #output-env-credentials: true
               env:
                 AWS_PROFILE: TestProfile2
 
