@@ -1,0 +1,53 @@
+name: profile integ test
+on:
+  workflow_dispatch:
+
+jobs:
+  profile-oidc:
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event.pull_request.user.login == 'aws-sdk-osds' && github.repository == 'aws-actions/configure-aws-credentials') }}
+    permissions: 
+        id-token: write
+    strategy: 
+        fail-fast: false
+        matrix:
+            os: [windows-latest, ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    name: OIDC login profile writing test
+    steps:
+      - name: checkout
+        uses: actions/checkout@v5
+        with:
+            fetch-depth: 0
+            persist-credentials: false
+
+      - name: make profile 1
+        id: first-profile
+        uses: aws-actions/configure-aws-credentials@jfeddern-feat/multiple-profiles
+        with: 
+          role-to-assume: arn:aws:iam::884348119369:role/profile-test-1
+          aws-region: us-east-1
+          aws-profile: TestProfile1
+
+      - name: make profile 2
+        id: second-profile
+        uses: aws-actions/configure-aws-credentials@jfeddern-feat/multiple-profiles
+        with: 
+          role-to-assume: arn:aws:iam::884348119369:role/profile-test-2
+          aws-region: us-east-2
+          aws-profile: TestProfile2
+          
+      - name: check profile1 
+        run: aws sts get-caller-identity --profile TestProfile1
+      
+      - name: check profile2
+        run: aws sts get-caller-identity --profile TestProfile2
+
+      - name: Get Caller Identity
+        id: no-creds-sts-step
+        continue-on-error: true
+        run: |
+            aws sts get-caller-identity
+
+      - name: fail if we got caller id with env creds
+        if: steps.no-creds-sts-step.outcome == 'success'
+        run: exit 1
