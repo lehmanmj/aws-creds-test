@@ -43,6 +43,3 @@ jobs:
 
             - name: check env
               run: env
-
-            - name: are there any env creds
-              run: aws sts get-caller-identity
