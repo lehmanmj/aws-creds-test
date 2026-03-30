@@ -16,8 +16,7 @@ jobs:
                 aws-secret-access-key: ${{ secrets.PROFILE_1_SECRET_AK }}
                 aws-profile: TestProfile1
                 role-chaining: true
-              env:
-                AWS_PROFILE: TestProfile1
+
 
             - name: can we look at buckets w profile
               run: aws s3 ls --profile TestProfile1
