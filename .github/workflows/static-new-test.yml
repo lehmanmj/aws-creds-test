@@ -40,11 +40,6 @@ jobs:
                 echo "STATIC_ACCESS_KEY_ID=$AK_ID" >> $GITHUB_OUTPUT
                 echo "STATIC_SECRET_ACCESS_KEY=$SECRET_AK" >> $GITHUB_OUTPUT
 
-
-
-          - name: sleep so key can propagate
-            run: sleep 30
-
           - name: assume role with static creds
             uses: aws-actions/configure-aws-credentials@v6 #REPLACE THIS
             with:
