@@ -47,7 +47,7 @@ jobs:
                 role-to-assume: ${{ secrets.STATIC_TEST_TARGET_ROLE }}
                 aws-access-key-id: ${{ steps.create-key.outputs.STATIC_ACCESS_KEY_ID }}
                 aws-secret-access-key: ${{ steps.create-key.outputs.STATIC_SECRET_ACCESS_KEY }}
-                disable-retry: false
+                disable-retry: true
 
           - name: check account
             run: aws sts get-caller-identity
