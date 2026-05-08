@@ -33,7 +33,7 @@ jobs:
             id: create-key
             run: | 
                 AK_OUTPUT=$(aws iam create-access-key --user-name integ-test-static-user-${{ runner.os }})
-                AK_ID=$(echo $AK_OUTPUT | jqa -r '.AccessKey.AccessKeyId')
+                AK_ID=$(echo $AK_OUTPUT | jq -r '.AccessKey.AccessKeyId')
                 SECRET_AK=$(echo $AK_OUTPUT | jq -r '.AccessKey.SecretAccessKey')
                 echo "::add-mask::$AK_ID"
                 echo "::add-mask::$SECRET_AK"
