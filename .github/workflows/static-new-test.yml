@@ -24,7 +24,7 @@ jobs:
                 #persist-credentials: false
           - name: assume creator Role
             #uses: ./
-            uses: aws-actions/configure-aws-credentials@kellertk/retry-logic #REPLACE THIS
+            uses: aws-actions/configure-aws-credentials@kellertk/retry-logic-with-dist-DO-NOT-MERGE #REPLACE THIS
             with:
                 aws-region: us-west-2
                 role-to-assume: ${{ secrets.STATIC_USER_CREATION_ROLE }}
@@ -41,7 +41,7 @@ jobs:
                 echo "STATIC_SECRET_ACCESS_KEY=$SECRET_AK" >> $GITHUB_OUTPUT
 
           - name: assume role with static creds
-            uses: aws-actions/configure-aws-credentials@kellertk/retry-logic #REPLACE THIS
+            uses: aws-actions/configure-aws-credentials@kellertk/retry-logic-with-dist-DO-NOT-MERGE #REPLACE THIS
             with:
                 aws-region: us-west-2
                 role-to-assume: ${{ secrets.STATIC_TEST_TARGET_ROLE }}
@@ -56,7 +56,7 @@ jobs:
           - name: log back into creator role
             #uses: ./
             if: success() || failure() 
-            uses: aws-actions/configure-aws-credentials@kellertk/retry-logic #REPLACE THIS
+            uses: aws-actions/configure-aws-credentials@kellertk/retry-logic-with-dist-DO-NOT-MERGE #REPLACE THIS
             with:
                 aws-region: us-west-2
                 role-to-assume: ${{ secrets.STATIC_USER_CREATION_ROLE }}
