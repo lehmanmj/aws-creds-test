@@ -8,6 +8,7 @@ jobs:
         runs-on: ubuntu-24.04
         steps:
           - name: configure AWS Creds
+            id: first-config-step
             uses: aws-actions/configure-aws-credentials@kellertk/483
             with:
                 role-to-assume: arn:aws:iam::891612571239:role/githubActionTest-Role-5YBrxygEBfRs
@@ -15,6 +16,7 @@ jobs:
                 role-duration-seconds: 3600
                 audience: sts.amazonaws.com
           - name: log back into same role
+            id: second-config-step
             uses: aws-actions/configure-aws-credentials@kellertk/483
             with:
                 role-to-assume: arn:aws:iam::891612571239:role/githubActionTest-Role-5YBrxygEBfRs
