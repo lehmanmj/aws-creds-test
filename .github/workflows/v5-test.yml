@@ -14,5 +14,13 @@ jobs:
                 aws-region: us-west-1
                 role-duration-seconds: 3600
                 audience: sts.amazonaws.com
+          - name: log back into same role
+            uses: aws-actions/configure-aws-credentials@kellertk/483
+            with:
+                role-to-assume: arn:aws:iam::891612571239:role/githubActionTest-Role-5YBrxygEBfRs
+                aws-region: us-west-1
+                role-duration-seconds: 3600
+                audience: sts.amazonaws.com
           - name: check creds
             run: aws sts get-caller-identity
+
