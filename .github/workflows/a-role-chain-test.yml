@@ -9,14 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@jfeddern-feat/multiple-profiles
+        uses: aws-actions/configure-aws-credentials@kellertk/483
         with:
-            aws-region: us-east-1
+            aws-region: us-east-2
             role-to-assume: arn:aws:iam::884348119369:role/first-role-to-test
             retry-max-attempts: 6
             aws-profile: firstRoleInChain
       - name: assume second role
-        uses: aws-actions/configure-aws-credentials@jfeddern-feat/multiple-profiles
+        uses: aws-actions/configure-aws-credentials@kellertk/483
         with:
             aws-region: us-east-2
             role-to-assume: arn:aws:iam::884348119369:role/second-role-to-test
