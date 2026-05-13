@@ -1,0 +1,20 @@
+name: more session tags testing
+on: [workflow_dispatch, workflow_call]
+
+jobs:
+    do-the-thing:
+        name: test out session tags
+        runs-on: ubuntu-24.04
+        steps:
+          - name: configure AWS Creds
+            id: first-config-step
+            uses: aws-actions/configure-aws-credentials@kellertk/390
+            with:
+                role-to-assume: arn:aws:iam::884348119369:role/session-tags-testing-role
+                aws-region: us-east-2
+                role-duration-seconds: 3600
+                audience: sts.amazonaws.com
+                aws-access-key-id: ${{secrets.SESSION_TAGS_TESTING_AKID}}
+                aws-secret-access-key: ${{secrets.SESSION_TAGS_TESTING_SECRET_AK}}
+          - name: check creds
+            run: aws sts get-caller-identity
