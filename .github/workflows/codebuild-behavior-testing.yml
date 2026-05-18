@@ -1,4 +1,4 @@
-name: Hello World
+name: codebuild test
 on: [workflow_dispatch]
 jobs:
   Hello-World-Job:
