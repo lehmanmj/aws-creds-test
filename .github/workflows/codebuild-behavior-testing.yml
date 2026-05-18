@@ -5,9 +5,12 @@ jobs:
     runs-on:
       - codebuild-CAWSC_self-hosted_Tester-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
-      - run: aws sts get-caller-identity
+      - name: check initial identity
+        run: aws sts get-caller-identity
       - name: log into other role
         uses: aws-actions/configure-aws-credentials@v6
         with:
           aws-region: us-west-2
           role-to-assume: arn:aws:iam::884348119369:role/codebuild-test-role-2
+      - name: check if we are using other role
+        run: aws sts get-caller-identity
