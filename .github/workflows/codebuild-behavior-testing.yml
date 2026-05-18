@@ -12,5 +12,6 @@ jobs:
         with:
           aws-region: us-west-2
           role-to-assume: arn:aws:iam::884348119369:role/codebuild-test-role-2
+          force-skip-oidc: true
       - name: check if we are using other role
         run: aws sts get-caller-identity
