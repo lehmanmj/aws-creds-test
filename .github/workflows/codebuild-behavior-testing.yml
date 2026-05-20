@@ -5,12 +5,18 @@ jobs:
     runs-on:
       - codebuild-CAWSC_self-hosted_Tester-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
-      - name: check initial identity (confirm we are using coebuild service role)
+      - name: check initial identity (confirm we are using codebuild service role)
         run: aws sts get-caller-identity
+      
+      - name: Login to Amazon ECR
+        id: login-ecr-local
+        uses: aws-actions/amazon-ecr-login@v2
+      
       - name: assume other role
         uses: aws-actions/configure-aws-credentials@v5
         with:
           aws-region: us-west-2
           role-to-assume: arn:aws:iam::884348119369:role/codebuild-test-role-2
+      
       - name: check new identity (confirm we assumed the new role)
         run: aws sts get-caller-identity
