@@ -16,6 +16,5 @@ jobs:
                 audience: sts.amazonaws.com
                 aws-access-key-id: ${{secrets.SESSION_TAGS_TESTING_AKID}}
                 aws-secret-access-key: ${{secrets.SESSION_TAGS_TESTING_SECRET_AK}}
-                custom-tags: '{"first-long-key": "first-long-val", "second-long-key": "second-long-val", "third-long-key": "third-long-val", "fourth-long-key": "fourth-long-val", "fifth-long-key": "fifth-long-val", "sixth-long-key": "sixth-long-val", "seventh-long-key": "seventh-long-val", "eighth-long-key": "eighth-long-val", "ninth-long-key": "ninth-long-val", "tenth-long-key": "tenth-long-val"}'
           - name: check creds
             run: aws sts get-caller-identity
