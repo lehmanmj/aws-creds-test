@@ -16,6 +16,6 @@ jobs:
                 audience: sts.amazonaws.com
                 aws-access-key-id: ${{secrets.SESSION_TAGS_TESTING_AKID}}
                 aws-secret-access-key: ${{secrets.SESSION_TAGS_TESTING_SECRET_AK}}
-                custom-tags: '{"abcdefghijklmnopqrstuvwxyzABCDEFGHIJ": "hello"}'
+                custom-tags: '{"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa": "hello"}'
           - name: check creds
             run: aws sts get-caller-identity
