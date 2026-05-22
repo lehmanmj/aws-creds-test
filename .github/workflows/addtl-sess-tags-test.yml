@@ -8,7 +8,7 @@ jobs:
         steps:
           - name: configure AWS Creds
             id: first-config-step
-            uses: aws-actions/configure-aws-credentials@kellertk/390
+            uses: aws-actions/configure-aws-credentials@main
             with:
                 role-to-assume: arn:aws:iam::884348119369:role/session-tags-testing-role
                 aws-region: us-east-2
@@ -16,5 +16,6 @@ jobs:
                 audience: sts.amazonaws.com
                 aws-access-key-id: ${{secrets.SESSION_TAGS_TESTING_AKID}}
                 aws-secret-access-key: ${{secrets.SESSION_TAGS_TESTING_SECRET_AK}}
+                custom-tags: '{"eks-cluster-name": "my-eks-cluster-apg", "kubernetes-pod-uid": "1025f496-9ff5-4e1c-8723-a2493f4e195b", "eks-cluster-arn": "arn:aws:eks:us-east-2:884348119369:cluster/my-eks-cluster-apg", "kubernetes-pod-name": "eks-large-apg-rbkzc-runner-xmm6f", "kubernetes-namespace": "arc-runners","kubernetes-service-account": "runner-sa"}'
           - name: check creds
             run: aws sts get-caller-identity
