@@ -10,7 +10,7 @@ jobs:
             id: first-config-step
             uses: lehmanmj/configure-aws-credentials@noCommitHash
             with:
-                role-to-assume: arn:aws:iam::884348119369:role/session-tags-testing-role
+                role-to-assume: arn:aws:iam::884348119369:role/session-tags-testing-role2
                 aws-region: eu-north-1
                 role-duration-seconds: 3600
                 audience: sts.amazonaws.com
