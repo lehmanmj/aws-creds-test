@@ -8,7 +8,7 @@ jobs:
         steps:
           - name: configure AWS Creds
             id: first-config-step
-            uses: aws-actions/configure-aws-credentials@main
+            uses: lehmanmj/configure-aws-credentials@noCommitHash
             with:
                 role-to-assume: arn:aws:iam::884348119369:role/session-tags-testing-role
                 aws-region: eu-north-1
