@@ -18,6 +18,7 @@ jobs:
         with:
           aws-region: us-west-2
           role-to-assume: arn:aws:iam::884348119369:role/codebuild-test-role-2
+          custom-tags: '{"first-long-key": "first-long-val", "second-long-key": "second-long-val", "third-long-key": "third-long-val", "fourth-long-key": "fourth-long-val", "fifth-long-key": "fifth-long-val", "sixth-long-key": "sixth-long-val", "seventh-long-key": "seventh-long-val", "eighth-long-key": "eighth-long-val", "ninth-long-key": "ninth-long-val", "tenth-long-key": "tenth-long-val"}'
       
       - name: check new identity (confirm we assumed the new role)
         run: aws sts get-caller-identity
