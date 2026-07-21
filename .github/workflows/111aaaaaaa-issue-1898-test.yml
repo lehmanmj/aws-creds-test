@@ -6,7 +6,7 @@ on:
 permissions:
     id-token: write
 jobs:
-  run_job_with_aws:
+  repro:
     runs-on: ubuntu-latest
     steps:
       - name: Configure AWS credentials
