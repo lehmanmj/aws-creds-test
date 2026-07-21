@@ -1,6 +1,5 @@
-name: 1AAAA Issue 1898 test
+name: Reproduce Issue 1898
 on: 
-    workflow_dispatch:
     pull_request:
 
 permissions:
