@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v6.1.3
+        uses: aws-actions/configure-aws-credentials@v6.2.0
         with:
             aws-region: us-east-2
             role-to-assume: arn:aws:iam::884348119369:role/first-role-to-test
       - name: assume second role
-        uses: aws-actions/configure-aws-credentials@v6.1.3
+        uses: aws-actions/configure-aws-credentials@v6.2.0
         with:
             aws-region: us-east-2
             role-to-assume: arn:aws:iam::884348119369:role/second-role-to-test
