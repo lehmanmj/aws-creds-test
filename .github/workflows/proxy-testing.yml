@@ -19,7 +19,7 @@ jobs:
               s.once("data", () => s.end("HTTP/1.1 202 Accepted\r\nContent-Length: 0\r\nConnection: close\r\n\r\n"));
             }).listen(3128, "127.0.0.1");
           ' &
-      - uses: aws-actions/configure-aws-credentials@v6  
+      - uses: aws-actions/configure-aws-credentials@proxy200
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           aws-region: us-east-1
