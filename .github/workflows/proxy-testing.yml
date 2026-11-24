@@ -11,19 +11,19 @@ jobs:
   proxy-test:
     runs-on: ubuntu-latest
     steps:
-    #   - name: Start bad proxy
-    #     run: |
-    #       node -e '
-    #         require("net").createServer(s => {
-    #           s.on("error",()=>{});
-    #           s.once("data", () => s.end("HTTP/1.1 202 Accepted\r\nContent-Length: 0\r\nConnection: close\r\n\r\n"));
-    #         }).listen(3128, "127.0.0.1");
-    #       ' &
+      - name: Start proxy
+        run: |
+          node -e '
+            require("net").createServer(s => {
+              s.on("error",()=>{});
+              s.once("data", () => s.end("HTTP/1.1 202 Accepted\r\nContent-Length: 0\r\nConnection: close\r\n\r\n"));
+            }).listen(3128, "127.0.0.1");
+          ' &
       - uses: aws-actions/configure-aws-credentials@v6  
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           aws-region: us-east-1
-          #http-proxy: http://127.0.0.1:3128
+          http-proxy: http://127.0.0.1:3128
 
       - name: check creds
         run: aws sts get-caller-identity
